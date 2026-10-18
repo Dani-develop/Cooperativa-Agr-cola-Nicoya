@@ -1,0 +1,10 @@
+flowchart LR
+    M[Cliente Mint] -->|DNS 53 TCP/UDP| D[BIND9 en Ubuntu]
+    M -->|HTTPS 443| A[Apache en Ubuntu]
+    A -->|localhost 8082| W[WordPress en Docker]
+    W -->|bd:3306| B[MariaDB en Docker]
+    W --- V1[Volumen de archivos]
+    B --- V2[Volumen de base de datos]
+    M -->|FTP con TLS| F[vsftpd: directorio por usuario]
+    C[Cron en Ubuntu] --> R[Respaldo BD y archivos]
+    R --> O[Copia protegida en otro equipo]

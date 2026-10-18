@@ -1,0 +1,44 @@
+# Credenciales y configuración local
+.env
+.env.*
+!.env.example
+/secrets/
+/credenciales/
+*.key
+*.pem
+*.p12
+*.pfx
+*.cnf.local
+*.secret
+
+# Datos vivos y respaldos reales
+/backups/
+/respaldos/
+/data/
+/datos/
+*.sql
+*.sql.gz
+*.dump
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+*.sav
+
+# Entorno de desarrollo
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.tmp
+*.swp
+~$*

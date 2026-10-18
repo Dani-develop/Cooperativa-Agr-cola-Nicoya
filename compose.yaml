@@ -1,0 +1,49 @@
+# BORRADOR: estructura inicial, pendiente de validar en la VM del proyecto.
+# No sustituye la configuración de BIND9, Apache, FTP y Cron en el host.
+name: cooperativa-nicoya
+
+services:
+  bd:
+    image: ${MARIADB_IMAGE:?Definir MARIADB_IMAGE en .env}
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Definir DB_ROOT_PASSWORD en .env}
+      MARIADB_DATABASE: ${DB_NAME:?Definir DB_NAME en .env}
+      MARIADB_USER: ${DB_USER:?Definir DB_USER en .env}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Definir DB_PASSWORD en .env}
+    volumes:
+      - datos_bd:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 30s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aplicacion
+
+  wordpress:
+    image: ${WORDPRESS_IMAGE:?Definir WORDPRESS_IMAGE en .env}
+    restart: unless-stopped
+    depends_on:
+      bd:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: bd:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:?Definir DB_NAME en .env}
+      WORDPRESS_DB_USER: ${DB_USER:?Definir DB_USER en .env}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:?Definir DB_PASSWORD en .env}
+    ports:
+      - "127.0.0.1:${HTTP_BACKEND_PORT:?Definir HTTP_BACKEND_PORT en .env}:80"
+    volumes:
+      - archivos_wordpress:/var/www/html
+    networks:
+      - aplicacion
+
+volumes:
+  datos_bd:
+  archivos_wordpress:
+
+networks:
+  aplicacion:
+    driver: bridge
