@@ -1,12 +1,12 @@
 # Índice de evidencias
 
-Estado: sin evidencias de infraestructura del proyecto. Una carpeta creada no acredita un requisito.
+Estado: C01/T01 ejecutado, validado y documentado. Los demás requisitos permanecen pendientes.
 
 Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o salidas en texto; incluir contexto suficiente y revisar datos privados antes de publicar. Los fallos pueden conservarse como diagnóstico si se distinguen del resultado final.
 
 | ID | Qué acredita | Estado | Archivo | Fecha/equipo | Commit bajo prueba | Revisor |
 |---|---|---|---|---|---|---|
-| C01-T01 | Zona DNS propia en BIND9 | Pendiente | | | | |
+| C01-T01 | Zona DNS propia en BIND9 | Aprobado | [Evidencias DNS](dns/README.md) | 2026-10-21 / cooperativa-server + cooperativa-mint | `83de95a` | Daniel |
 | C02-T02 | VirtualHost HTTPS sobre WordPress en Docker | Pendiente | | | | |
 | C03-T03 | Dos servicios Docker con volúmenes y versiones específicas | Pendiente | | | | |
 | C04-T04 | FTP por integrante o rol con aislamiento | Pendiente | | | | |
