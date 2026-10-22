@@ -1,5 +1,16 @@
-# Evidencias: dns
+# Evidencias: DNS
 
-Estado: pendiente. Referencias: C01/T01.
+**Estado:** completado.  
+**Referencia:** C01 / T01.  
+**Fecha de ejecución:** 2026-10-21.  
+**Servidor:** `cooperativa-server`.  
+**Cliente:** `cooperativa-mint`.  
+**Dominio:** `cooperativa.internal`.
 
-Agregar evidencia real después de ejecutar la prueba, con fecha/equipo y commit bajo prueba. Enlazarla en el [índice](../indice.md) y en el registro correspondiente. Revisar datos privados antes de publicar.
+## Evidencias
+
+- [`C01_T01_01_red-servidor-configurada.png`](C01_T01_01_red-servidor-configurada.png): configuración de la interfaz interna `192.168.50.1/24`, rutas y conectividad del servidor.
+- [`C01_T01_02_dhcp-comunicacion-mint-servidor.png`](C01_T01_02_dhcp-comunicacion-mint-servidor.png): asignación DHCP `192.168.50.100/24` al cliente Mint y comunicación exitosa con `192.168.50.1`.
+- [`C01_T01_03_validacion-zona-bind9.png`](C01_T01_03_validacion-zona-bind9.png): validación de la configuración mediante `named-checkconf` y `named-checkzone`, con resultado `OK`.
+- [`C01_T01_04_resolucion-autoritativa-bind9.png`](C01_T01_04_resolucion-autoritativa-bind9.png): resolución autoritativa de los registros A, SOA y `www` de `cooperativa.internal` desde BIND9.
+- [`C01_T01_05_resolucion-dns-desde-mint.png`](C01_T01_05_resolucion-dns-desde-mint.png): resolución normal desde Linux Mint utilizando `192.168.50.1` como DNS recibido por DHCP, sin entradas para `cooperativa.internal` en `/etc/hosts`.
