@@ -4,7 +4,7 @@ Fuente principal: enunciado del Proyecto de Curso, requisitos comunes y escenari
 
 | ID | Obligación | Aceptación | Prueba | Estado | Responsable |
 |---|---|---|---|---|---|
-| C01 | Zona DNS propia en BIND9 | Zona válida, A/SOA autoritativos y resolución normal desde Mint sin hosts ni resolve | [T01](../pruebas/casos.md#t01) | Pendiente | Axel |
+| C01 | Zona DNS propia en BIND9 | Zona válida, A/SOA autoritativos y resolución normal desde Mint sin hosts ni resolve | [T01](../pruebas/casos.md#t01) | Aprobado | Axel |
 | C02 | VirtualHost HTTPS sobre WordPress en Docker | Dominio correcto, confianza TLS, redirección HTTP y sitio/panel operativos; backend aislado | [T02](../pruebas/casos.md#t02) | Pendiente | Por asignar |
 | C03 | Dos servicios Docker con volúmenes y versiones específicas | BD saludable, imágenes identificadas y contenido/imagen persistentes al recrear contenedores | [T03](../pruebas/casos.md#t03) | Pendiente | Por asignar |
 | C04 | FTP por integrante o rol con aislamiento | Cuenta A administra lo propio y no modifica ni borra un archivo de B | [T04](../pruebas/casos.md#t04) | Pendiente | Por asignar |
