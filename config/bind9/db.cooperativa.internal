@@ -1,0 +1,14 @@
+$TTL 604800
+
+@   IN  SOA ns.cooperativa.internal. admin.cooperativa.internal. (
+        2026102201 ; Serial
+        604800     ; Refresh
+        86400      ; Retry
+        2419200    ; Expire
+        604800 )   ; Negative Cache TTL
+
+@       IN  NS  ns.cooperativa.internal.
+@       IN  A   192.168.50.1
+ns      IN  A   192.168.50.1
+www     IN  A   192.168.50.1
+server  IN  A   192.168.50.1
