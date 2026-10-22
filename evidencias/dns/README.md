@@ -14,3 +14,4 @@
 - [`C01_T01_03_validacion-zona-bind9.png`](C01_T01_03_validacion-zona-bind9.png): validación de la configuración mediante `named-checkconf` y `named-checkzone`, con resultado `OK`.
 - [`C01_T01_04_resolucion-autoritativa-bind9.png`](C01_T01_04_resolucion-autoritativa-bind9.png): resolución autoritativa de los registros A, SOA y `www` de `cooperativa.internal` desde BIND9.
 - [`C01_T01_05_resolucion-dns-desde-mint.png`](C01_T01_05_resolucion-dns-desde-mint.png): resolución normal desde Linux Mint utilizando `192.168.50.1` como DNS recibido por DHCP, sin entradas para `cooperativa.internal` en `/etc/hosts`.
+- [`C01_T01_06_validacion-visual-firefox.png`](C01_T01_06_validacion-visual-firefox.png): validación visual desde Firefox en Linux Mint accediendo a `http://cooperativa.internal:8080`, confirmando que una aplicación cliente puede resolver el dominio configurado y acceder al servicio publicado en `192.168.50.1`.
