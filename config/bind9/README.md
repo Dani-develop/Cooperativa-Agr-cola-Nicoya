@@ -51,9 +51,21 @@ sudo cp /etc/bind/named.conf.local /etc/bind/named.conf.local.bak
 sudo cp /etc/bind/named.conf.options /etc/bind/named.conf.options.bak
 ```
 
+## Copiar los archivos de configuración al servidor
+
+Desde la raíz del repositorio, los tres archivos de configuración de BIND9 pueden copiarse a `/etc/bind/` mediante:
+
+```bash
+sudo cp config/bind9/named.conf.local /etc/bind/named.conf.local
+sudo cp config/bind9/named.conf.options /etc/bind/named.conf.options
+sudo cp config/bind9/db.cooperativa.internal /etc/bind/db.cooperativa.internal
+```
+
+Estos comandos permiten aplicar en el servidor la configuración almacenada en el repositorio.
+
 ## Validación
 
-Antes de reiniciar el servicio se verificó la sintaxis general:
+Después de copiar los archivos y antes de reiniciar el servicio, se verificó la sintaxis general:
 
 ```bash
 sudo named-checkconf
