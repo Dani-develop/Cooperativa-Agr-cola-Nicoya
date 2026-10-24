@@ -4,6 +4,7 @@
 !.env.example
 /secrets/
 /credenciales/
+/.t03-estado.json
 *.key
 *.pem
 *.p12
