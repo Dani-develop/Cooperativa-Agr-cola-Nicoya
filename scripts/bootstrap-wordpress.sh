@@ -12,5 +12,5 @@ fi
 export WP_BOOT_ADMIN_USER WP_BOOT_ADMIN_EMAIL WP_BOOT_ADMIN_PASSWORD
 docker compose exec -T --user www-data \
     --env WP_BOOT_ADMIN_USER --env WP_BOOT_ADMIN_EMAIL --env WP_BOOT_ADMIN_PASSWORD \
-    wordpress php < "$fuente/config/wordpress/instalar.php"
+    wordpress php /dev/stdin < "$fuente/config/wordpress/instalar.php"
 unset WP_BOOT_ADMIN_PASSWORD
