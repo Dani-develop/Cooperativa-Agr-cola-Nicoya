@@ -1,6 +1,6 @@
 # Guía de instalación paso a paso
 
-**Borrador estructurado.** Los pasos finales y sus salidas se completan al ejecutarlos; todavía no existe una instalación verificada del proyecto. No ejecutar cambios en las VMs de laboratorios anteriores.
+Los bloques de infraestructura de Axel están registrados en [T01](../pruebas/registros/T01-C01-2026-10-21.md). Los bloques 4, 5 y 6 de Daniel tienen el [procedimiento completo](13-daniel-wordpress-https.md) y registros T02/T03. Los bloques editoriales, FTP, respaldo y reproducción siguen pendientes. No ejecutar cambios en las VMs de laboratorios anteriores.
 
 Cada bloque usará la [plantilla de paso](plantilla-paso.md) y cerrará con prueba y evidencia.
 
@@ -29,9 +29,9 @@ bash scripts/preflight.sh
 
 No instala paquetes, no modifica red ni servicios y no muestra `.env`. Completar [inventario](inventario.md) con resultados observados. Una herramienta ausente significa que queda por preparar, no que haya que improvisar una instalación.
 
-## Bloque Docker: preparación futura
+## Bloque Docker: procedimiento de Daniel
 
-Cuando estén confirmados los prerrequisitos, se documentará esta secuencia en Ubuntu:
+La secuencia completa, generación privada de contraseñas, instalación de Docker, descarga por digest y arranque están en [pasos 1 a 4](13-daniel-wordpress-https.md#preparación-de-ubuntu). Una copia manual inicial comienza con:
 
 ```bash
 cp .env.example .env
@@ -44,7 +44,7 @@ Completar variables y generar contraseñas privadas antes de validar:
 docker compose config -q
 ```
 
-Esperado: salida 0. Evitar capturar `docker compose config` sin `-q`, porque puede imprimir contraseñas resueltas. Después de aprobar la configuración se incorporarán los pasos de descarga, arranque, logs y prueba.
+Esperado: salida 0. Evitar capturar `docker compose config` sin `-q`, porque puede imprimir contraseñas resueltas. Continuar con los pasos de TLS, inicialización y confianza de Mint de la guía de Daniel; no volver a inicializar una VM que ya contiene el sitio.
 
 ## Consideraciones que deben acompañar los comandos
 
@@ -59,4 +59,6 @@ Esperado: salida 0. Evitar capturar `docker compose config` sin `-q`, porque pue
 
 | Bloque | Ejecutado por | Fecha | Commit de configuración | Prueba y evidencia | Revisor |
 |---|---|---|---|---|---|
-| Pendiente | | | | | |
+| 1-3 | Axel | 2026-10-21 | `83de95a` | [T01](../pruebas/registros/T01-C01-2026-10-21.md), heredado sin cambios | Daniel |
+| 4-6 | Daniel | 2026-10-24 | `f2520a6`; pruebas ampliadas en `9f1ac00` | [T02](../pruebas/registros/T02-C02-2026-10-24.md), [T03](../pruebas/registros/T03-C03-2026-10-24.md) | Frander, pendiente |
+| 7-11 | Pendiente | | | Reinicio de capas C02/C03 probado; T13 integral y reproducción pendientes | |

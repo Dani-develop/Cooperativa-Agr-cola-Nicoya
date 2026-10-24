@@ -15,6 +15,7 @@
 | 10 | [Reproducción desde cero](10-reproduccion-desde-cero.md) |
 | 11 | [Demo y defensa](11-demo-y-defensa.md) |
 | 12 | [Plan inicial 18-20 de octubre](12-plan-18-20-octubre.md) |
+| 13 | [Daniel WordPress MariaDB persistencia y HTTPS](13-daniel-wordpress-https.md) |
 
 Apoyos: [inventario](inventario.md), [plantilla de paso](plantilla-paso.md), [referencias](referencias.md) y [diagramas](diagramas/README.md).
 

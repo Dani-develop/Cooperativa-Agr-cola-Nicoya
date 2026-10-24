@@ -2,6 +2,8 @@
 
 Estado: pendiente. C06/T06. Un integrante distinto de quien construyó el entorno seguirá la guía en otra computadora con una pareja de VMs propia.
 
+La [guía de Daniel](13-daniel-wordpress-https.md) ya detalla Docker, Apache/TLS, inicialización y pruebas; el punto de partida de su ejecución fue la OVA de Axel. Importar y continuar esa OVA no acredita una instalación limpia. Las capas de FTP, respaldo y personalización deberán completar sus procedimientos antes de aceptar T06 integral.
+
 ## Prerrequisitos a fijar
 
 VirtualBox, versión de Ubuntu y Mint, recursos mínimos medidos, acceso a imágenes/paquetes, Git, credenciales privadas nuevas y recursos del contenido. No utilizar una VM ya configurada como prueba de reproducción.

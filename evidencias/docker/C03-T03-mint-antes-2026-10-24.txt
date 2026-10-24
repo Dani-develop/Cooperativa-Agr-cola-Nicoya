@@ -1,0 +1,4 @@
+Fecha UTC: 2026-10-24T18:12:53.293069+00:00
+entrada_http=200 url=https://cooperativa.internal/prueba-tecnica-c03-daniel/
+imagen_http=200 sha256=9e0149587a731732ce390a5b445c28a53fa3239aa6b9e0d8ade5da74c7c4e011 bytes=1580
+T03_LECTURA_HTTPS_OK (sin excepcion TLS ni resolucion forzada)

@@ -1,0 +1,7 @@
+CA recibida para comparar con Ubuntu
+sha256 Fingerprint=C1:7C:CA:F7:3C:9C:5D:7F:6D:A2:2A:78:FB:FC:F7:BE:BA:62:86:6E:15:30:9A:5D:A8:62:81:D2:14:DF:5E:39
+Updating certificates in /etc/ssl/certs...
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Confianza instalada para curl y Firefox; reabrir Firefox.

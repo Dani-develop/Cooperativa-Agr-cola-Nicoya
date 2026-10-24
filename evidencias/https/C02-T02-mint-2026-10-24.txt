@@ -1,0 +1,51 @@
+Fecha Costa Rica: 2026-10-24T12:12:17-06:00
+cooperativa-mint
+192.168.50.1    cooperativa.internal
+192.168.50.1
+HTTP/1.1 301 Moved Permanently
+
+Date: Sat, 24 Oct 2026 18:12:17 GMT
+
+Server: Apache/2.4.66 (Ubuntu)
+
+Location: https://cooperativa.internal/
+
+Content-Type: text/html; charset=iso-8859-1
+
+
+
+inicio_http=200 tls_verify=0
+Cooperativa Agricola Nicoya
+login_http=200
+id="loginform"
+HTTP/1.1 302 Found
+
+Date: Sat, 24 Oct 2026 18:12:18 GMT
+
+Server: Apache/2.4.69 (Debian)
+
+X-Powered-By: PHP/8.3.36
+
+Expires: Wed, 11 Jan 1984 05:00:00 GMT
+
+Cache-Control: no-cache, must-revalidate, max-age=0, no-store, private
+
+X-Redirect-By: WordPress
+
+Location: https://cooperativa.internal/wp-login.php?redirect_to=https%3A%2F%2Fcooperativa.internal%2Fwp-admin%2F&reauth=1
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+subject=C = CR, ST = Guanacaste, L = Nicoya, O = Proyecto academico EIF431O, CN = cooperativa.internal
+issuer=C = CR, ST = Guanacaste, L = Nicoya, O = Proyecto academico EIF431O, CN = Cooperativa Nicoya CA del laboratorio
+Verification: OK
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Verify return code: 0 (ok)
+CORRECTO: puerto directo 8082 inaccesible desde Mint
+CORRECTO: puerto directo 3306 inaccesible desde Mint
+wp-config.php http=403
+.env http=403
+.git/config http=403
+T02_RED_TLS_AISLAMIENTO_OK (login autenticado se verifica por separado)

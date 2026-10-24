@@ -1,0 +1,24 @@
+Fecha Costa Rica: 2026-10-24T12:15:17-06:00
+2026-10-24 18:14:39
+ 18:15:17 up 0 min,  1 user,  load average: 1.88, 0.52, 0.18
+Updating f2520a6..9f1ac00
+Fast-forward
+ pruebas/t03-desde-mint.py | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 pruebas/t03-desde-mint.py
+9f1ac00a067b9d5251f2c53bb225417482893332
+active
+active
+active
+active
+NAME                             IMAGE                                                                                                   COMMAND                  SERVICE     CREATED         STATUS                    PORTS
+cooperativa-nicoya-bd-1          mariadb:11.8.9@sha256:f16d7a344413e519dff518f27bdb221388f84b0d274c97c4fb5f2cb0dc1b34fa                  "docker-entrypoint.s…"   bd          2 minutes ago   Up 19 seconds (healthy)   3306/tcp
+cooperativa-nicoya-wordpress-1   wordpress:7.1.3-php8.3-apache@sha256:d42f63cb89ad0eab272c4b393164e63830d0df270009907919f7dcce52b1a20b   "docker-entrypoint.s…"   wordpress   2 minutes ago   Up 19 seconds (healthy)   127.0.0.1:8082->80/tcp
+PERSISTENCIA_OK post=4 media=5 sha256=9e0149587a731732ce390a5b445c28a53fa3239aa6b9e0d8ade5da74c7c4e011
+Bloqueos del kernel en este arranque: no observados
+2d8b1c82febb7000bd15ffac5cf9945cc802e3bbb0d07bdbe93b30e3ebe574c4  /etc/bind/named.conf.options
+b948b6dcd72c11669ab0ac3c2c32368edb026ddff18a9253c60f3372ea1b452e  /etc/bind/named.conf.local
+d8101893cc4d896e594916893bd4950e93792c89628d549e603842be4fb9b48c  /etc/bind/db.cooperativa.internal
+747f82c23b9d06bca2726098e3e5ad611ea00906df2c2cf9409fdb421116dd19  /etc/netplan/00-installer-config.yaml
+afb6b93b773d603cd127a67a584973a03ff044956ba41df62c232167cbf50ad9  /etc/dhcp/dhcpd.conf
+bb8f5c428a898317870350b2849a2e15d1635a15348d289f12ee1796fe9c5937  /etc/default/isc-dhcp-server
