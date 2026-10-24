@@ -1,0 +1,29 @@
+[req]
+prompt = no
+distinguished_name = identidad
+req_extensions = solicitud
+
+[identidad]
+C = CR
+ST = Guanacaste
+L = Nicoya
+O = Proyecto academico EIF431O
+CN = cooperativa.internal
+
+[solicitud]
+basicConstraints = critical,CA:FALSE
+keyUsage = critical,digitalSignature,keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @nombres
+
+[servidor]
+basicConstraints = critical,CA:FALSE
+keyUsage = critical,digitalSignature,keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @nombres
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+
+[nombres]
+DNS.1 = cooperativa.internal
+DNS.2 = www.cooperativa.internal

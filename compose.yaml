@@ -1,5 +1,5 @@
-# BORRADOR: estructura inicial, pendiente de validar en la VM del proyecto.
-# No sustituye la configuración de BIND9, Apache, FTP y Cron en el host.
+# C02/C03: WordPress y MariaDB. Apache termina TLS en el host.
+# Las credenciales se guardan en .env, fuera de Git y con modo 600.
 name: cooperativa-nicoya
 
 services:
@@ -33,10 +33,22 @@ services:
       WORDPRESS_DB_NAME: ${DB_NAME:?Definir DB_NAME en .env}
       WORDPRESS_DB_USER: ${DB_USER:?Definir DB_USER en .env}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:?Definir DB_PASSWORD en .env}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'https://cooperativa.internal');
+        define('WP_SITEURL', 'https://cooperativa.internal');
+        define('FORCE_SSL_ADMIN', true);
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_ENVIRONMENT_TYPE', 'staging');
     ports:
       - "127.0.0.1:${HTTP_BACKEND_PORT:?Definir HTTP_BACKEND_PORT en .env}:80"
     volumes:
       - archivos_wordpress:/var/www/html
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /var/www/html/wp-config.php && php -r 'exit(@fsockopen(\"127.0.0.1\",80)?0:1);'"]
+      start_period: 60s
+      interval: 10s
+      timeout: 5s
+      retries: 6
     networks:
       - aplicacion
 

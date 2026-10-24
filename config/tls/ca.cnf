@@ -1,0 +1,17 @@
+[req]
+prompt = no
+distinguished_name = identidad
+x509_extensions = autoridad
+
+[identidad]
+C = CR
+ST = Guanacaste
+L = Nicoya
+O = Proyecto academico EIF431O
+CN = Cooperativa Nicoya CA del laboratorio
+
+[autoridad]
+basicConstraints = critical,CA:TRUE,pathlen:0
+keyUsage = critical,keyCertSign,cRLSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always
