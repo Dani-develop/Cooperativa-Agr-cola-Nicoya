@@ -32,6 +32,8 @@ if ($accion === 'crear') {
         'post_status'=>'inherit','post_author'=>$admins[0]->ID,
     ],$upload['file'],$post,true);
     if (is_wp_error($media)) fallo($media->get_error_message());
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+    wp_update_attachment_metadata($media, wp_generate_attachment_metadata($media, $upload['file']));
     $estado=['post_id'=>$post,'media_id'=>$media,'title'=>get_the_title($post),
         'content_sha256'=>hash('sha256',get_post_field('post_content',$post)),
         'file'=>$upload['file'],'file_sha256'=>hash_file('sha256',$upload['file']),
