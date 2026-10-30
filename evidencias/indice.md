@@ -1,6 +1,6 @@
 # Índice de evidencias
 
-Estado: sin evidencias de infraestructura del proyecto. Una carpeta creada no acredita un requisito.
+Estado: evidencia FTP registrada (C04-T04, básico sin capturas); resto de infraestructura del proyecto pendiente. Una carpeta creada no acredita un requisito.
 
 Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o salidas en texto; incluir contexto suficiente y revisar datos privados antes de publicar. Los fallos pueden conservarse como diagnóstico si se distinguen del resultado final.
 
@@ -9,7 +9,7 @@ Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o 
 | C01-T01 | Zona DNS propia en BIND9 | Pendiente | | | | |
 | C02-T02 | VirtualHost HTTPS sobre WordPress en Docker | Pendiente | | | | |
 | C03-T03 | Dos servicios Docker con volúmenes y versiones específicas | Pendiente | | | | |
-| C04-T04 | FTP por integrante o rol con aislamiento | Pendiente | | | | |
+| C04-T04 | FTP por integrante o rol con aislamiento | Registrado básico (25 y 30/10/2026, sin capturas; pendiente FTPS) | [ftp/README.md](ftp/README.md) | cooperativa-server 25–30/10/2026 | | |
 | C05-T05 | Respaldo de BD automático con Cron y restauración | Pendiente | | | | |
 | C06-T06 | Documentación técnica reproducible y diagramas | Pendiente | | | | |
 | E01-T07 | Tema con logo y colores propios | Pendiente | | | | |
