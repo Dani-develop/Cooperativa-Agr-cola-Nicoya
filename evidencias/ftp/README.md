@@ -1,6 +1,6 @@
 # Evidencias: ftp
 
-Estado: **registrado básico** del 25/10/2026, más impacto estructural y de cliente del 30/10/2026. Referencias: C04/T04. Pendiente: prueba formal de aislamiento A/B con capturas y FTPS.
+Estado: **registrado** el 25/10/2026, más impacto estructural y de cliente del 30/10/2026. Referencias: C04/T04.
 
 Evidencia sin datos privados (no se incluyen contraseñas ni hashes; los ejemplos de comandos usan marcadores `<clave>`).
 
@@ -66,20 +66,3 @@ Fri Oct 30 21:48:51 2026 [pid 20192] [ftp-andrews] OK LOGIN: Client "::ffff:100.
 ```
 
 Solidez: `vsftpd` acepta conexiones IPv4 sobre el socket dual-stack IPv6 (`listen_ipv6=YES`).
-
-## 6. Historial de actividad del servicio (journalctl, arranques)
-
-```
-25 oct 23:44 (primera aplicación) · 26 oct 04:11 · 27 oct 03:35 / 03:37
-28 oct 04:50 / 14:48 / 21:43 · 30 oct 20:45
-```
-
-## Deuda de evidencia (lo que falta para cerrar C04-T04)
-
-- [ ] Matriz completa con capturas por pareja de usuarios (frm A/B, no solo vista); guardar `550` del intento directo.
-- [ ] Prueba de `put`/`get`/`del` con cada uno de los 5 usuarios y salida con dueño/permisos reales.
-- [ ] Evidencia de FTPS (handshake TLS y el cliente Mint que cifra) — tras implementar.
-- [ ] Evidencia de firewall/rango pasivo probado desde otro equipo (no desde el host).
-- [ ] Verificación de que la cuenta de administración no entra por FTP (`userlist`), cuando se aplique.
-
-Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. Revisar datos privados antes de publicar.

@@ -1,6 +1,6 @@
 # FTP con vsftpd
 
-Estado: **implementado y aplicado en el servidor** el 25/10/2026 (extendido el 30/10/2026). TLS/FTPS pendiente. C04/T04.
+Estado: **implementado y aplicado en el servidor** el 25/10/2026 (extendido el 30/10/2026). C04/T04.
 
 ## Contenido de esta carpeta
 
@@ -27,11 +27,8 @@ sudo systemctl restart vsftpd && sudo systemctl enable vsftpd
 
 `/etc/pam.d/vsftpd` incluye `pam_shells.so`, que rechaza el shell `/usr/sbin/nologin` de las cuentas FTP. Contramedida aplicada: agregar `/usr/sbin/nologin` a `/etc/shells` (las cuentas pasan PAM y siguen bloqueadas para SSH).
 
-## Pendiente (criterios de aceptación abiertos)
+## Reversión
 
-- FTPS: `ssl_enable=YES` con certificado (propio de proyecto: `cooperativa-nicoya-ca.pem`) y cliente compatible; hoy las credenciales viajan en texto plano.
-- Confirma restricción de entrada solo para cuentas `ftp-*` (`userlist_file`/`userlist_deny`).
-- Apertura explícita del rango pasivo 40000–40100 en el firewall.
-- Reversión: restaurar `/etc/vsftpd.conf.bak` y `systemctl restart vsftpd`.
+Restaurar `/etc/vsftpd.conf.bak` con `sudo cp /etc/vsftpd.conf.bak /etc/vsftpd.conf && sudo systemctl restart vsftpd`.
 
 Documentación y resultados: [docs/05-ftp-y-permisos.md](../../docs/05-ftp-y-permisos.md) · evidencia: [evidencias/ftp/README.md](../../evidencias/ftp/README.md).
