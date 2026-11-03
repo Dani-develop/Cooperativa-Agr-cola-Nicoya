@@ -53,9 +53,9 @@ Capturas reales del panel, sin reconstrucción gráfica. Antes de publicarlas se
 |---|---|
 | E01 | Logo aplicado en el encabezado; misma página en dos tamaños de pantalla; Astra activo y versión; versiones de plugins de la plantilla |
 | E02 | Recorrido de cada enlace con su URL; quitar el mapa de plantilla (Pune, India) de Contacto; destino de "Contáctenos" |
-| E03 | Texto, URL y fuentes de cada pieza; captura pública de cinco piezas; las dos entradas no visibles; revisor |
+| E03 | Fuentes técnicas; texto de Nuestros Productos y de las entradas publicadas; URL de cada pieza; captura pública de cinco piezas; las dos entradas no visibles; revisor |
 | E04 | Formulario en la página pública y mensaje de confirmación; versión y licencia de WPFormsDB y de los plugins de la plantilla |
 | E05 | Prueba de denegación con sesiones separadas (Autor y Editor); segundo Autor; entradas propiedad de un Autor |
-| Medios | Origen, licencia y herramienta de generación de logo e imágenes ([medios](../../contenido/medios/README.md)) |
+| Medios | Origen declarado (DALL·E 3, oct. 2026); falta verificar los términos de uso y el origen de los 2 videos ([medios](../../contenido/medios/README.md)) |
 
 Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. [Índice general](../indice.md).
