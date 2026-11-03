@@ -1,6 +1,6 @@
 # Pruebas y resultados
 
-T01 conserva el registro de Axel. Daniel ejecutó T02/T03 y una comprobación parcial de reinicio el 24/10/2026; Frander todavía debe revisar esos resultados. Los demás casos siguen pendientes. No se trasladan resultados de los laboratorios como evidencia del proyecto.
+T01 conserva el registro de Axel. Daniel ejecutó T02/T03 y una comprobación parcial de reinicio el 24/10/2026; Frander todavía debe revisar esos resultados. Ari registró T07-T11 (contenido, identidad y roles de WordPress) el 28/10/2026, todos parciales y sin revisión. Los demás casos siguen pendientes. No se trasladan resultados de los laboratorios como evidencia del proyecto.
 
 Los procedimientos están en [casos de prueba](../pruebas/casos.md) y los archivos en [registros](../pruebas/registros/README.md). El índice de capturas está en [evidencias](../evidencias/indice.md).
 
@@ -12,11 +12,11 @@ Los procedimientos están en [casos de prueba](../pruebas/casos.md) y los archiv
 | T04 | Pendiente | | | | |
 | T05 | Pendiente | | | | |
 | T06 | Pendiente | | | | |
-| T07 | Pendiente | | | | |
-| T08 | Pendiente | | | | |
-| T09 | Pendiente | | | | |
-| T10 | Pendiente | | | | |
-| T11 | Pendiente | | | | |
+| T07 | Parcial: personalización visible; faltan logo en el sitio y dos tamaños | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Identidad](../pruebas/registros/T07-E01-2026-10-28.md) | Por asignar |
+| T08 | Parcial: menú de cuatro secciones; faltan el recorrido de enlaces y quitar el mapa de plantilla | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Menú](../pruebas/registros/T08-E02-2026-10-28.md) | Por asignar |
+| T09 | Parcial: cinco páginas y tres entradas publicadas; faltan textos, fuentes y URL | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Contenido](../pruebas/registros/T09-E03-2026-10-28.md) | Por asignar |
+| T10 | Parcial: formulario recibe y guarda consultas; falta captura pública y licencias | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Plugin](../pruebas/registros/T10-E04-2026-10-28.md) | Por asignar |
+| T11 | Pendiente de ejecución: cuentas creadas, límites sin probar | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Roles](../pruebas/registros/T11-E05-2026-10-28.md) | Por asignar |
 | T12 | Pendiente | | | | |
 | T13 | Parcial: DNS/HTTPS/Docker/datos; integral pendiente | 2026-10-24 / Ubuntu + Mint | `9f1ac00` | [Reinicio técnico en T03](../pruebas/registros/T03-C03-2026-10-24.md) | Frander, pendiente |
 
