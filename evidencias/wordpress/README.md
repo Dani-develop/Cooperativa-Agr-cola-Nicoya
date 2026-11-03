@@ -47,15 +47,31 @@ Capturas reales del panel, sin reconstrucción gráfica. Antes de publicarlas se
 | [Crear Autor](E05-T11-usuario-autor-crear.png) | Cuenta `campo_nicoya` con rol Autor (incluye un primer intento con correo repetido) |
 | [Usuarios](E05-T11-usuarios-lista.png) | Cuatro usuarios y sus roles |
 
-## Evidencia que falta
+## Capturas del 03/11/2026 (segunda tanda)
+
+Capturadas por Ari el 02 y 03/11/2026 sobre `https://cooperativa.internal`. Se ocultaron correos y nombres de terceros en WPFormsDB y un elemento ajeno del escritorio. Revisión humana pendiente.
+
+| Archivo | Qué demuestra |
+|---|---|
+| [Plugins instalados](E01-T07-plugins-instalados-versiones.png) | Versiones: Spectra Blocks 1.0.12, Starter Templates 4.7.9, SureCookie 1.7.0, SureForms 2.13.0, SureRank 1.10.3, WPForms Lite 2.0.3, Database for WPForms 1.1.1; Akismet 5.7.2 y Hello Dolly 1.7.2 inactivos. Hay actualizaciones pendientes |
+| [Portada pública](E01-T07-inicio-publico-portada.png), [servicios](E01-T07-inicio-publico-servicios.png), [valores](E01-T07-inicio-publico-valores.png) | Inicio con menú de 4 secciones, botón Contáctenos, paleta verde y beige |
+| [Pie con logo](E01-T07-pie-con-logo.png) | Logo aplicado en el **pie** (no en el encabezado) |
+| [Contacto](E02-T08-contacto-publico-url-contact.png), [mapa](E02-T08-contacto-mapa-universidad-nacional.png) | URL `/contact/`; el mapa de Pune fue reemplazado por la Universidad Nacional, Nicoya |
+| [Nuestros Productos](E02-T08-nuestros-productos-url-services.png), [catálogo](E03-T09-nuestros-productos-catalogo.png) | URL `/services/`; seis productos con texto e imagen |
+| [Quiénes somos](E02-T08-quienes-somos-url-about.png), [asamblea](E03-T09-quienes-somos-asamblea.png) | URL `/about/`; misión, visión, valores |
+| [Formulario público](E04-T10-formulario-publico-contacto.png) | Formulario en la página pública (ver nota: muestra "Please enable JavaScript" y campos sin estilo) |
+| [WPFormsDB](E04-T10-wpformsdb-cinco-entradas.png) | 5 entradas, la última del 02/11/2026 |
+| [Entradas](E03-T09-entradas-lista-2026-11-03.png), [Páginas](E03-T09-paginas-lista-2026-11-03.png) | 5 entradas publicadas (autores Ari Admin y `campo_nicoya`) y 5 páginas publicadas |
+
+## Evidencia que falta (actualizada 03/11/2026)
 
 | Requisito | Falta |
 |---|---|
-| E01 | Logo aplicado en el encabezado; misma página en dos tamaños de pantalla; Astra activo y versión; versiones de plugins de la plantilla |
-| E02 | Recorrido de cada enlace con su URL; quitar el mapa de plantilla (Pune, India) de Contacto; destino de "Contáctenos" |
-| E03 | Fuentes técnicas; texto de Nuestros Productos y de las entradas publicadas; URL de cada pieza; captura pública de cinco piezas; las dos entradas no visibles; revisor |
-| E04 | Formulario en la página pública y mensaje de confirmación; versión y licencia de WPFormsDB y de los plugins de la plantilla |
-| E05 | Prueba de denegación con sesiones separadas (Autor y Editor); segundo Autor; entradas propiedad de un Autor |
-| Medios | Origen declarado (DALL·E 3, oct. 2026); falta verificar los términos de uso y el origen de los 2 videos ([medios](../../contenido/medios/README.md)) |
+| E01 | Versión de Astra y captura de Apariencia > Temas con Astra activo; logo en el **encabezado** (hoy solo está en el pie) o declarar que va en el pie; misma página en móvil/tablet |
+| E02 | Captura del clic en "Contáctenos" que muestre la URL de destino; capturas de Inicio con URL `https://` visible ya existen |
+| E03 | Fuentes técnicas y marca de datos simulados (p. ej. "150+ productores", "4 centros de acopio", teléfonos); texto de entradas; confirmar slugs en inglés (`/services/`, `/about/`, `/contact/`) y título "Gallery"; revisor |
+| E04 | Mensaje de confirmación tras enviar; el formulario público muestra aviso de JavaScript y campos sin estilo: repetir captura con la página cargada; licencias de WPFormsDB y plugins |
+| E05 | Pruebas de denegación con sesiones separadas (Autor y Editor). Ya hay dos Autores con entradas propias (`campo_nicoya` publica dos) pero falta un segundo usuario Autor |
+| Medios | Términos de uso de DALL·E 3; origen de 2 videos |
 
 Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. [Índice general](../indice.md).
