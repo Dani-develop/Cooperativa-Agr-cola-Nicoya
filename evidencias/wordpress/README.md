@@ -69,9 +69,9 @@ Capturadas por Ari el 02 y 03/11/2026 sobre `https://cooperativa.internal`. Se o
 |---|---|
 | E01 | Versión de Astra y captura de Apariencia > Temas con Astra activo; logo en el **encabezado** (hoy solo está en el pie) o declarar que va en el pie; misma página en móvil/tablet |
 | E02 | Captura del clic en "Contáctenos" que muestre la URL de destino; capturas de Inicio con URL `https://` visible ya existen |
-| E03 | Fuentes técnicas y marca de datos simulados (p. ej. "150+ productores", "4 centros de acopio", teléfonos); texto de entradas; confirmar slugs en inglés (`/services/`, `/about/`, `/contact/`) y título "Gallery"; revisor |
+| E03 | Pegar en WordPress los textos de `contenido/entradas/` (con fuentes); texto fuente de Nuestros Productos; revisor |
 | E04 | Mensaje de confirmación tras enviar; el formulario público muestra aviso de JavaScript y campos sin estilo: repetir captura con la página cargada; licencias de WPFormsDB y plugins |
 | E05 | Pruebas de denegación con sesiones separadas (Autor y Editor). Ya hay dos Autores con entradas propias (`campo_nicoya` publica dos) pero falta un segundo usuario Autor |
-| Medios | Términos de uso de DALL·E 3; origen de 2 videos |
+| Medios | Términos de uso de DALL·E 3 (videos excluidos de la entrega) |
 
 Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. [Índice general](../indice.md).

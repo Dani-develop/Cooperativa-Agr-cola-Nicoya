@@ -1,15 +1,15 @@
 # Entradas de campo
 
-Estado al 28/10/2026: cinco entradas de `ari_admin`, tres publicadas el 27/10/2026 y dos en borrador. Los filtros del panel indican 7 entradas en total; las otras dos no son visibles en la captura (ver [T09](../../pruebas/registros/T09-E03-2026-10-28.md)). La entrada técnica de C03 de Daniel está en borrador y no cuenta.
+Estado al 07/11/2026: cinco entradas publicadas en el panel (captura del 03/11/2026): tres de `ari_admin` y dos de `campo_nicoya` (rol Autor). Los textos completos, con fuentes y datos simulados marcados, se redactaron el 07/11/2026 y esperan revisión humana.
 
-| Entrada | Estado |
-|---|---|
-| Asamblea general ordinaria y balance financiero anual | Publicada |
-| Rutas del camión de transporte para comunidades rurales | Publicada |
-| Llegada de insumos agrícolas y biofertilizantes al almacén central | Publicada |
-| Taller de conservación hídrica y manejo de suelos en Guanacaste | Borrador |
-| Recepción de cosechas de granos básicos temporada 2026-2027 | Borrador |
+| Entrada | Autor | Texto |
+|---|---|---|
+| Asamblea general ordinaria y balance financiero anual | ari_admin | [N01](N01-asamblea-general.md) |
+| Rutas del camión de transporte para comunidades rurales | campo_nicoya | [N02](N02-rutas-camion.md) |
+| Llegada de insumos agrícolas y biofertilizantes al almacén central | ari_admin | [N03](N03-insumos-biofertilizantes.md) |
+| Taller de conservación hídrica y manejo de suelos en Guanacaste | ari_admin | [N04](N04-taller-conservacion-hidrica.md) |
+| Recepción de cosechas de granos básicos temporada 2026-2027 | campo_nicoya | [N05](N05-recepcion-cosechas.md) |
 
-El 03/11/2026 Ari entregó tres resúmenes en [entradas-blog.md](entradas-blog.md) (suelos y manejo hídrico, compra directa y consumo local, talleres de bioinsumos). **No coinciden con los títulos del panel** (solo el taller de conservación hídrica en borrador se parece a uno de ellos) y son resúmenes breves, no entradas completas. Aclarar si son un plan nuevo o el texto de las publicadas.
+Los tres resúmenes entregados el 03/11/2026 ([entradas-blog.md](entradas-blog.md)) **no se usan** para E03: no coinciden con los títulos publicados. Las entradas oficiales para E03 son estas cinco.
 
-Pendiente: guardar el texto completo de cada entrada publicada con sus fuentes y señalar los datos simulados del caso. Para probar roles ([T11](../../pruebas/registros/T11-E05-2026-10-28.md)) hacen falta noticias de **dos Autores distintos** y una entrada ajena para el intento de edición denegado; hoy todas pertenecen a un Administrador. Registrar autor, revisor Editor, fecha, estado y URL en el [inventario](../inventario.csv). No confundir Autor con un rol capaz de administrar páginas o plugins.
+Pendiente: pegar estos textos en WordPress (los publicados pueden tener otro contenido), registrar URL y revisor. Las fuentes no oficiales (guía de Nicaragua, nota de prensa) deben contrastarse antes de darlas por definitivas.
