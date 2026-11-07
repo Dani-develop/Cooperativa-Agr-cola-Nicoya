@@ -1,0 +1,3 @@
+# C05: respaldo diario de MariaDB. Entrada del crontab del usuario ftp-andrews.
+# La hora del servidor es UTC: 09:00 UTC equivale a las 03:00 en Costa Rica (UTC-6).
+0 9 * * * /var/scripts/backup-bd.sh >> /var/log/cooperativa-cron.log 2>&1

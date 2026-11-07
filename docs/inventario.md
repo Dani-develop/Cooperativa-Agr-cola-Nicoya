@@ -20,10 +20,10 @@ Observado al continuar las VMs de Axel, 23-24/10/2026. Daniel conserva las redes
 | Versiones Docker/Compose | Verificar | Engine 29.9.2; Compose 5.6.1 | T02/T03 |
 | WordPress/PHP imagen | wordpress:7.1.3-php8.3-apache | Núcleo 7.1.3, PHP 8.3.36; digest en .env.example y T03 | 24/10/2026 |
 | MariaDB imagen | mariadb:11.8.9 | 11.8.9-MariaDB-ubu2404; digest en .env.example y T03 | 24/10/2026 |
-| Apache/BIND9/vsftpd/Cron | En el host | Apache host 2.4.66 Ubuntu; Apache contenedor 2.4.69 Debian; BIND 9.20.24 heredado. FTP/Cron de proyecto pendientes | 24/10/2026 |
+| Apache/BIND9/vsftpd/Cron | En el host | Apache host 2.4.66 Ubuntu; Apache contenedor 2.4.69 Debian; BIND 9.20.24 heredado. Cron activo con la tarea de respaldo de `ftp-andrews` (03/11/2026); FTP del proyecto pendiente | 24/10/2026 y 03/11/2026 |
 | Ruta del repositorio en Ubuntu | Acordar | /srv/cooperativa, rama feature/c02-c03-wordpress-daniel | 24/10/2026 |
-| Destino de respaldo | /srv/respaldos-cooperativa | Pendiente | |
-| Destino externo | Otro equipo | Pendiente | |
+| Destino de respaldo | /srv/respaldos-cooperativa | /var/backups/cooperativa; script en /var/scripts, log en /var/log/cooperativa-backup.log; hora del servidor UTC | 30/10/2026, [guía](14-andres-respaldo-cron.md) |
+| Destino externo | Otro equipo | Mint del proyecto, `~/copia-cooperativa`, por `rsync` sobre SSH (clave restringida, solo lectura); restauración de BD probada. Cron de Mint y archivos de WordPress pendientes | 07/11/2026, [guía](14-andres-respaldo-cron.md) |
 | Cuentas FTP y WordPress | Ver guías | daniel_admin, administrador técnico WP. FTP y roles editoriales pendientes | Credencial privada en credenciales/admin.env |
 
 No registrar contraseñas, claves privadas ni contenido de `.env` en este archivo.

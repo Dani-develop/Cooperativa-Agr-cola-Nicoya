@@ -1,6 +1,6 @@
 # Respaldo y restauración
 
-Estado: diseño, sin script ni restauración aprobados. C05/T05.
+Estado: volcado lógico, script de respaldo y ejecución por Cron probados el 03/11/2026 ([procedimiento y resultado](14-andres-respaldo-cron.md)); la copia externa a Mint y la restauración de la BD en un contenedor aislado se probaron el 07/11/2026. Faltan los archivos de WordPress y la restauración completa por HTTPS; C05 no está aprobado. C05/T05.
 
 ## Política propuesta
 
@@ -18,11 +18,11 @@ El mínimo obligatorio es BD automática con Cron y restauración documentada. I
 - Aplicar retención tras una copia exitosa; un error no debe borrar la última copia válida.
 - Copiar al destino externo y registrar también ese resultado.
 
-El script [backup.sh](../scripts/backup.sh) está deshabilitado hasta implementar y comprobar este contrato.
+El script [backup.sh](../scripts/backup.sh) cumple la mayor parte: ejecuta el volcado `mariadb-dump --single-transaction` mediante el script de root [dump-bd.sh](../config/cron/dump-bd.sh), verifica su hash, bloquea ejecuciones simultáneas, escribe desde temporales, registra en un log sin secretos y aplica la retención de 7 copias solo tras una copia válida. Además copia en caliente la carpeta de datos de MariaDB como respaldo secundario. Todavía no coordina los archivos de WordPress ni copia al destino externo; ver las [decisiones y limitaciones](14-andres-respaldo-cron.md#decisiones-y-limitaciones).
 
 ## Cron
 
-La entrada se mantendrá en [config/cron](../config/cron/README.md). Probar una ejecución disparada realmente por Cron a una hora cercana, con el entorno de Cron, antes de fijar el horario definitivo. Ejecutar a mano el script no prueba la programación. Guardar log, hora y archivo generado.
+La entrada está en [config/cron](../config/cron/README.md). Se probó una ejecución disparada realmente por Cron con un horario corto antes de fijar el definitivo (`0 9 * * *`, 03:00 en Costa Rica porque el servidor usa UTC). Ejecutar a mano el script no prueba la programación. Log, hora y archivos generados en el [registro T05](../pruebas/registros/T05-C05-2026-11-03.md).
 
 ## Restauración aislada
 

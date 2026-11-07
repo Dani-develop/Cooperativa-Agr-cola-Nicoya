@@ -49,7 +49,7 @@ Dominio efectivo: `cooperativa.internal`. Ubuntu `192.168.50.1`, Mint `192.168.5
 | [evidencias/](evidencias/indice.md) | Índice de evidencias por requisito, prueba y commit. |
 | [entregables/](entregables/README.md) | Documento técnico y presentación para Aula Virtual. |
 
-El inventario **de solo lectura** es `bash scripts/preflight.sh`, dentro de Ubuntu. `preparar-tls.sh` y `bootstrap-wordpress.sh` se implementaron para la instalación inicial; se niegan a reemplazar material TLS o un sitio ya existente. Los scripts de respaldo, restauración y verificación integral siguen deshabilitados con salida 2.
+El inventario **de solo lectura** es `bash scripts/preflight.sh`, dentro de Ubuntu. `preparar-tls.sh` y `bootstrap-wordpress.sh` se implementaron para la instalación inicial; se niegan a reemplazar material TLS o un sitio ya existente. `backup.sh` se probó con Cron el 03/11/2026 y el volcado se restauró en un contenedor aislado en Mint el 07/11/2026 (solo la BD; ver [guía de respaldo](docs/14-andres-respaldo-cron.md)); los scripts de restauración y verificación integral siguen deshabilitados con salida 2.
 
 `compose.yaml` requiere variables y contraseñas locales. El sitio técnico conserva la apariencia y los ejemplos iniciales de WordPress; eso no acredita los requisitos editoriales E01-E05. No publicar `.env`, claves, cookies, la BD ni las VMs. No usar `down -v` en la pareja de continuidad.
 

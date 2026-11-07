@@ -1,0 +1,81 @@
+C05 / T05: volcado logico, script integrado y ejecucion por Cron
+Fecha: 2026-11-03 (hora del servidor: UTC; Costa Rica = UTC-6). Maquina: cooperativa-server, usuario ftp-andrews.
+Commit de configuracion bajo prueba: pendiente de commit en feature/c05-cron-andres.
+Salida transcrita de la terminal SSH; no contiene credenciales. Las rutas completas se acortan a veces.
+
+== 1. Permiso entregado por el administrador ==
+$ id
+uid=1005(ftp-andrews) gid=1001(ftp-proyecto) groups=1001(ftp-proyecto),100(users)
+$ docker ps --format '{{.Names}} {{.Status}}'
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+$ sudo -n -l
+User ftp-andrews may run the following commands on cooperativa-server:
+    (root) NOPASSWD: /usr/local/sbin/dump-bd.sh
+$ ls -l /usr/local/sbin/dump-bd.sh
+-rwxr-xr-x 1 root root 943 Nov  2 02:09 /usr/local/sbin/dump-bd.sh
+$ head -1 /usr/local/sbin/dump-bd.sh
+#!/bin/bash
+
+== 2. Volcado directo con sudo (20:15 UTC) ==
+$ sudo /usr/local/sbin/dump-bd.sh; echo "codigo: $?"
+OK /var/backups/cooperativa/bd-20261103-201534.sql.gz 1168306 bytes
+codigo: 0
+$ cd /var/backups/cooperativa && sha256sum -c $(ls -t bd-*.sql.gz.sha256 | head -1)
+bd-20261103-201534.sql.gz: OK
+$ zcat bd-20261103-201534.sql.gz | grep -c 'CREATE TABLE'
+27
+$ zcat bd-20261103-201534.sql.gz | tail -n 2
+-- Dump completed on 2026-11-03 20:15:35
+(archivos del volcado: -rw-r----- root ftp-proyecto, lectura de grupo)
+
+== 3. Incidencia: script con la salida del volcado capturada por $(...) ==
+Log de la ejecucion de las 20:25 y del intento posterior:
+2026-11-03 20:25:02 INICIO volcado logico
+2026-11-03 20:45:00 ERROR otra ejecucion en curso
+Temporales de 0 bytes dejados por root: .bd-20261103-202502.1332889.tmp y .bd-20261103-202502.1332889.sha.tmp
+Prueba A (entrada /dev/null y salida a archivo, como en Cron):
+  OK /var/backups/cooperativa/bd-20261103-205111.sql.gz 1168305 bytes
+Prueba B (salida capturada con $(...), entrada en la terminal): se cuelga; con `timeout 60` aun
+estaban vivos sudo, dump-bd.sh, docker compose exec y mariadb-dump (38 s de ejecucion).
+
+== 4. Script integrado, ejecucion manual (20:56 UTC) ==
+$ /var/scripts/backup-bd.sh; echo "codigo: $?"
+codigo: 0
+2026-11-03 20:56:55 INICIO volcado logico
+2026-11-03 20:56:56 OK /var/backups/cooperativa/bd-20261103-205655.sql.gz 1168306 bytes
+2026-11-03 20:56:56 OK hash verificado /var/backups/cooperativa/bd-20261103-205655.sql.gz
+2026-11-03 20:56:56 INICIO copia de archivos de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-11-03 20:57:03 OK /var/backups/cooperativa/bd-20261103-205655.tar.gz 10551720 bytes
+2026-11-03 20:57:03 FIN codigo 0
+
+== 5. Ejecucion por Cron, horario de prueba cada 2 minutos ==
+Entrada: */2 * * * * /var/scripts/backup-bd.sh >> /var/log/cooperativa-cron.log 2>&1
+2026-11-03 21:00:01 INICIO volcado logico
+2026-11-03 21:00:02 OK /var/backups/cooperativa/bd-20261103-210001.sql.gz 1168306 bytes
+2026-11-03 21:00:02 OK hash verificado /var/backups/cooperativa/bd-20261103-210001.sql.gz
+2026-11-03 21:00:02 INICIO copia de archivos de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-11-03 21:00:04 OK /var/backups/cooperativa/bd-20261103-210001.tar.gz 10551720 bytes
+2026-11-03 21:00:04 FIN codigo 0
+2026-11-03 21:02:02 INICIO volcado logico
+2026-11-03 21:02:02 OK /var/backups/cooperativa/bd-20261103-210202.sql.gz 1168307 bytes
+2026-11-03 21:02:02 OK hash verificado /var/backups/cooperativa/bd-20261103-210202.sql.gz
+2026-11-03 21:02:02 INICIO copia de archivos de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-11-03 21:02:05 OK /var/backups/cooperativa/bd-20261103-210202.tar.gz 10551720 bytes
+2026-11-03 21:02:05 FIN codigo 0
+
+== 6. Retencion de 7 (21:17 UTC) ==
+$ ls /var/backups/cooperativa/bd-*.sql.gz | wc -l
+7
+$ ls /var/backups/cooperativa/bd-*.tar.gz | wc -l
+7
+$ grep RETENCION /var/log/cooperativa-backup.log | tail -n 4
+2026-11-03 21:14:02 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210001.sql.gz
+2026-11-03 21:14:05 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210001.tar.gz
+2026-11-03 21:16:02 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210202.sql.gz
+2026-11-03 21:16:05 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210202.tar.gz
+$ cat /var/log/cooperativa-cron.log
+(vacio)
+
+== 7. Horario definitivo ==
+$ crontab -l
+0 9 * * * /var/scripts/backup-bd.sh >> /var/log/cooperativa-cron.log 2>&1

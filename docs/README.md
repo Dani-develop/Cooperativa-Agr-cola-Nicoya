@@ -16,6 +16,7 @@
 | 11 | [Demo y defensa](11-demo-y-defensa.md) |
 | 12 | [Plan inicial 18-20 de octubre](12-plan-18-20-octubre.md) |
 | 13 | [Daniel WordPress MariaDB persistencia y HTTPS](13-daniel-wordpress-https.md) |
+| 14 | [Andrés respaldo de la BD con Cron](14-andres-respaldo-cron.md) |
 
 Apoyos: [inventario](inventario.md), [plantilla de paso](plantilla-paso.md), [referencias](referencias.md) y [diagramas](diagramas/README.md).
 

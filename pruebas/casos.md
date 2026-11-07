@@ -60,7 +60,7 @@ Procedimiento: Esperar ejecución real de Cron, inspeccionar resultado y restaur
 
 Esperado: Copia generada automáticamente y recuperación integral comprobada, con duración medida.
 
-Estado: pendiente. Registro y evidencia: por incorporar.
+Estado: parcial. La copia automática por Cron y el volcado están comprobados el 03/11/2026 ([registro T05](registros/T05-C05-2026-11-03.md), [evidencias](../evidencias/respaldos/README.md)); la copia a Mint y la restauración de la BD en un contenedor aislado se probaron el 07/11/2026 (22,9 s de carga, 27 tablas, 4 usuarios de WordPress). Siguen pendientes los archivos de WordPress y la restauración completa por HTTPS.
 
 <a id="t06"></a>
 

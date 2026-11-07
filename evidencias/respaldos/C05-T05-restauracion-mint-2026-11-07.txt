@@ -1,0 +1,39 @@
+C05 / T05: copia fuera del servidor y restauracion aislada de la BD en Mint
+Fecha: 2026-11-07. Maquina: cooperativa-mint (usuario axel), Mint 22.3 en VirtualBox. Origen: cooperativa-server (192.168.50.1), usuario ftp-andrews.
+Commit de configuracion bajo prueba: pendiente de commit en feature/c05-cron-andres.
+Transcripcion de las capturas de la terminal de Mint (no se guardaron las salidas completas en texto). Solo se anotan los valores observados;
+no contiene credenciales. La clave de la base del contenedor de prueba era temporal y se omite.
+
+== 1. Copia traida con rsync por SSH (clave dedicada, solo lectura) ==
+Volcado mas reciente en ~/copia-cooperativa:
+  bd-20261106-090002.sql.gz   1,2M   6 nov 03:00 (hora local; 09:00 UTC, ejecucion de Cron)
+Los volcados se copiaron con exito. La verificacion del hash en la copia no consta en esta transcripcion.
+
+== 2. Contenedor aislado ==
+Contenedor: bd-restauracion (imagen mariadb:11.8.9, sin puertos publicados). Base creada vacia: cooperativa_wp.
+Incidencia: el primer arranque termino con "Exited (1)" y en los registros "Unable to start server." (el servidor temporal
+del arranque no estuvo listo a tiempo en la VM lenta). Se elimino el contenedor (docker rm -f) y se repitio con una espera
+mas larga; la segunda vez quedo listo.
+
+== 3. Carga del volcado ==
+$ time zcat "$VOLCADO" | sudo docker exec -i bd-restauracion sh -c 'exec mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" cooperativa_wp'
+real    0m22,898s
+user    0m0,130s
+sys     0m0,173s
+
+== 4. Comprobaciones ==
+$ SHOW TABLES | wc -l
+28                      (27 tablas mas la linea de cabecera)
+Opciones de WordPress:
+  blogname   Cooperativa Agricola Nicoya
+  home       https://cooperativa.internal
+  siteurl    https://cooperativa.internal
+Ultimos registros de wp_posts (por ID): 2927 (papelera), 2926 y 2925 "logo" (inherit), 2924 "Hello world!" (inherit), 2923 "Auto Draft"
+$ SELECT COUNT(*) FROM wp_users
+4
+
+== No comprobado en esta prueba ==
+- Archivos de WordPress (wp-content: temas, plugins, subidas); no hay copia de ellos.
+- .env, claves y certificados TLS, Apache, DNS: la restauracion no levanto el sitio por HTTPS.
+- Copia de archivos de la BD (.tar.gz): no se restauro.
+- Ejecucion de Cron en Mint (pull programado): no observada.

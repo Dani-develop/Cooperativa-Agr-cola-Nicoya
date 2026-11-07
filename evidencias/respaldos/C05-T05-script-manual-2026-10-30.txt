@@ -1,0 +1,27 @@
+C05 / T05: ejecucion manual del script de respaldo (sin Cron)
+Fecha: 2026-10-30 (hora del servidor: UTC). Maquina: cooperativa-server, usuario ftp-andrews.
+Commit de configuracion bajo prueba: pendiente de commit en feature/c05-cron-andres.
+Salida transcrita de la terminal SSH; no contiene credenciales.
+
+$ tar -cf - -C /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data . | wc -c
+203601920
+
+$ df -h /var
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   23G   11G   11G  52% /
+
+$ bash -n /var/scripts/backup-bd.sh && echo SINTAXIS_OK
+SINTAXIS_OK
+
+$ /var/scripts/backup-bd.sh; echo "codigo: $?"
+codigo: 0
+
+$ ls -lh /var/backups/cooperativa; tail -5 /var/log/cooperativa-backup.log
+total 9.9M
+-rw-rw-r--+ 1 ftp-andrews ftp-proyecto 9.9M Oct 30 23:18 bd-20261030-231852.tar.gz
+-rw-rw-r--+ 1 ftp-andrews ftp-proyecto   92 Oct 30 23:18 bd-20261030-231852.tar.gz.sha256
+2026-10-30 23:18:52 INICIO respaldo de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-10-30 23:18:55 OK /var/backups/cooperativa/bd-20261030-231852.tar.gz 10355378 bytes
+
+$ cd /var/backups/cooperativa && sha256sum -c bd-*.sha256
+bd-20261030-231852.tar.gz: OK

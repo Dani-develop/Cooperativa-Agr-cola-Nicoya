@@ -1,6 +1,6 @@
 # Operación y diagnóstico
 
-C02/C03 de Daniel tienen pruebas del 24/10/2026; FTP, Cron y restauración siguen pendientes. Terminal Ubuntu, en `/srv/cooperativa` salvo que se indique Mint. Usar `sudo` para Docker.
+C02/C03 de Daniel tienen pruebas del 24/10/2026; FTP sigue pendiente y C05 está probado en parte (BD por Cron y restauración aislada; faltan los archivos de WordPress). Terminal Ubuntu, en `/srv/cooperativa` salvo que se indique Mint. Usar `sudo` para Docker.
 
 | Síntoma | Primero comprobar | Evitar |
 |---|---|---|
@@ -41,6 +41,7 @@ Credenciales: `.env` (600, administrador Linux) y `credenciales/admin.env` (600,
 | 23-24/10/2026 | Kernel Ubuntu con `soft lockup`, SSH intermitente; Mint también se atascó al arrancar | Consola y logs locales de las copias; registros T02/T03 | El bloqueo del kernel se observó; VirtualBox usaba NEM sobre el hipervisor de Windows. No se demostró una única causa raíz | Prueba autorizada con 1 CPU en cada copia, conservando RAM, MAC, red y archivos de Axel. Descargas seriales | T02/T03 y reinicio técnico satisfactorios con 1 CPU; comprobar en cada host |
 | 24/10/2026 | WordPress `exec format error` | Inspección de `/bin/sh` y `/bin/bash`: tamaño 0 en la imagen extraída | Archivos vacíos, observados después de bloqueos/apagados forzados | Retirar solo contenedor e imagen WordPress y descargar otra vez el mismo digest; conservar volúmenes | PHP 8.3.36 ejecutó; WordPress saludable y T03 satisfactorio |
 | 24/10/2026 | `sendmail: not found` al inicializar WP | Salida de inicialización local | No hay servicio de correo en la imagen | Se comprobó la instalación y login; no se añadió SMTP fuera del alcance | Login 200 y panel autenticado |
+| 03/11/2026 | El script de respaldo se quedó en `INICIO volcado logico`, dejó temporales de 0 bytes y el bloqueo ocupado | [Evidencia C05](../evidencias/respaldos/C05-T05-cron-volcado-2026-11-03.txt) | Con la salida del volcado capturada por `$(...)` y la entrada en la terminal, `mariadb-dump` se quedó bloqueado; con la entrada en `/dev/null` y la salida a un archivo funciona. La causa interna exacta no se determinó | Script con entrada y salida redirigidas, `9>&-` y `timeout` de 10 minutos; limpieza de los temporales | Ejecución manual y por Cron con `FIN codigo 0` ([T05](../pruebas/registros/T05-C05-2026-11-03.md)) |
 
 No se desactivó Hyper-V/VBS ni se cambió el arranque de Windows, Node o WSL. El ajuste de CPU afecta únicamente las copias importadas de Daniel. La OVA de origen mantiene 2 CPU. Para revertir en un host donde se haya probado su estabilidad: apagar la copia y usar `VBoxManage modifyvm NOMBRE --cpus 2`; no cambiar CPUs con la VM encendida ni presentarlo como una solución universal.
 

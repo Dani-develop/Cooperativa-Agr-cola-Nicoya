@@ -10,7 +10,7 @@ Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o 
 | C02-T02 | VirtualHost HTTPS sobre WordPress en Docker | Probado/documentado; revisión pendiente | [HTTPS](https/README.md), [T02](../pruebas/registros/T02-C02-2026-10-24.md) | 2026-10-24 / cooperativa-server + cooperativa-mint | `f2520a6`, repetición `9f1ac00` | Frander, pendiente |
 | C03-T03 | Dos servicios Docker con volúmenes y versiones específicas | Probado/documentado; revisión pendiente | [Docker](docker/README.md), [T03](../pruebas/registros/T03-C03-2026-10-24.md) | 2026-10-24 / cooperativa-server + cooperativa-mint | `f2520a6`, prueba adicional `9f1ac00` | Frander, pendiente |
 | C04-T04 | FTP por integrante o rol con aislamiento | Pendiente | | | | |
-| C05-T05 | Respaldo de BD automático con Cron y restauración | Pendiente | | | | |
+| C05-T05 | Respaldo de BD automático con Cron y restauración | Parcial: volcado, Cron y restauración de la BD en contenedor aislado comprobados; archivos de WordPress y restauración completa pendientes | [Respaldos](respaldos/README.md), [T05](../pruebas/registros/T05-C05-2026-11-03.md) | 2026-10-30, 2026-11-03 y 2026-11-07 / cooperativa-server + cooperativa-mint | Pendiente de commit | Por asignar |
 | C06-T06 | Documentación técnica reproducible y diagramas | Pendiente | | | | |
 | E01-T07 | Tema con logo y colores propios | Pendiente | | | | |
 | E02-T08 | Menú con al menos cuatro secciones | Pendiente | | | | |
