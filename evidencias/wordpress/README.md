@@ -81,6 +81,9 @@ Capturadas por Ari en la madrugada del 07/11/2026. Revisión humana pendiente.
 
 ## Evidencia que falta (actualizada 07/11/2026)
 
+El 07/11/2026 a la 01:51 el servidor de la VM dejó de estar accesible y no se pudieron hacer las correcciones ni capturas siguientes. Lo que sigue queda **pendiente** y los registros T07 a T11 conservan su veredicto parcial.
+
+
 | Requisito | Falta |
 |---|---|
 | E01 | Quitar o reemplazar el logo "GREEN GARDENER" de plantilla en Contacto y la imagen de portada móvil de plantilla (marca y licencia de terceros); decidir si el logo va en el encabezado; vista de tablet |
