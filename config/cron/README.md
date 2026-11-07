@@ -9,6 +9,7 @@ Estado: volcado, script y programación probados el 03/11/2026 en `cooperativa-s
 | [cooperativa-backup.cron](cooperativa-backup.cron) | crontab de `ftp-andrews` | Ejecuta el respaldo todos los días a las 09:00 UTC (03:00 en Costa Rica) y guarda la salida en `/var/log/cooperativa-cron.log`. |
 | [dump-bd.sh](dump-bd.sh) | `/usr/local/sbin/dump-bd.sh`, propiedad de root | Volcado lógico `mariadb-dump --single-transaction` de `cooperativa_wp`. Lo instaló el administrador y se ejecuta con `sudo`. |
 | [../../scripts/backup.sh](../../scripts/backup.sh) | `/var/scripts/backup-bd.sh` | Llama al volcado, copia la carpeta de datos, valida, registra y aplica la retención de 7. |
+| [mint-copia.cron](mint-copia.cron) | crontab de `axel` en la Mint del proyecto | Cada hora (minuto 15) ejecuta `~/copiar-respaldos-mint.sh`, que trae las copias del servidor, verifica el último volcado y conserva 30 de cada tipo. Fuente: [../../scripts/copiar-respaldos-mint.sh](../../scripts/copiar-respaldos-mint.sh). |
 
 `dump-bd.sh` es la transcripción del script que el administrador dejó instalado; ante cualquier duda, prevalece la copia del servidor. Debe pertenecer a root y no ser escribible por `ftp-andrews`: con `sudo` se ejecuta como root.
 
@@ -34,4 +35,4 @@ echo '0 9 * * * /var/scripts/backup-bd.sh >> /var/log/cooperativa-cron.log 2>&1'
 
 ## Aceptación
 
-Ejecución disparada por Cron y registrada: comprobada el 03/11/2026 con un horario de prueba cada 2 minutos. Pendiente: restauración aislada de BD y archivos con medición de tiempo, y la ejecución del horario definitivo de las 09:00 UTC.
+Ejecución disparada por Cron y registrada: comprobada el 03/11/2026 con un horario de prueba cada 2 minutos; el horario definitivo de las 09:00 UTC generó el volcado del 06/11. La Mint ejecuta su propia tarea (`mint-copia.cron`); Andrés informó que funciona, y falta archivar su log. Pendiente: restauración de los archivos de WordPress.

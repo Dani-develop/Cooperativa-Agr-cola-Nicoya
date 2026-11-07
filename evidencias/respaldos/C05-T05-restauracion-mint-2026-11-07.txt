@@ -36,4 +36,5 @@ $ SELECT COUNT(*) FROM wp_users
 - Archivos de WordPress (wp-content: temas, plugins, subidas); no hay copia de ellos.
 - .env, claves y certificados TLS, Apache, DNS: la restauracion no levanto el sitio por HTTPS.
 - Copia de archivos de la BD (.tar.gz): no se restauro.
-- Ejecucion de Cron en Mint (pull programado): no observada.
+- Esta transcripcion es de la restauracion manual. No incluye la salida de restaurar-prueba-mint.sh ni del Cron de Mint
+  (copiar-respaldos-mint.sh): Andres informo que funcionaron, pero su salida y su log no se archivaron.

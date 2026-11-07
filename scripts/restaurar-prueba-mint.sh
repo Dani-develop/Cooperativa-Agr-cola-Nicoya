@@ -2,7 +2,8 @@
 # Restauracion de PRUEBA de la BD en un contenedor aislado (se ejecuta en la Mint).
 # Trae (opcional) las copias, verifica el hash, levanta MariaDB desechable,
 # carga el volcado, comprueba el resultado y limpia. No toca el sitio real.
-# Solo ASCII para que no se dane al pegarlo por SSH. Estado: sin probar hasta registrarlo.
+# Solo ASCII y sin asteriscos para que no se dane al pegarlo por SSH.
+# Procedimiento y estado de la prueba: docs/14-andres-respaldo-cron.md (paso 10).
 #
 # Uso:
 #   restaurar-prueba-mint.sh                    usa el volcado mas reciente de la carpeta

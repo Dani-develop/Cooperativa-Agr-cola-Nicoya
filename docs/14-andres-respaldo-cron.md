@@ -4,7 +4,7 @@ Responsable: Andrés. Revisor humano: por asignar. Rama: `feature/c05-cron-andre
 
 ## Alcance y estado
 
-Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base de WordPress, el script de respaldo con validación y retención, su ejecución real por Cron (probada el 03/11/2026), la copia fuera del servidor hacia Mint con `rsync` y la restauración de la base en un contenedor aislado en Mint (07/11/2026). **Siguen pendientes** la copia y restauración de los archivos de WordPress (`wp-content`), la restauración visible por HTTPS, el Cron del lado de Mint, la reducción del ACL y la revisión de un compañero. La restauración se probó solo para la base de datos. Por eso C05 no está aprobado. Política y contrato completo en [respaldo y restauración](06-respaldo-y-restauracion.md).
+Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base de WordPress, el script de respaldo con validación y retención, su ejecución real por Cron (probada el 03/11/2026), la copia fuera del servidor hacia Mint con `rsync` y la restauración de la base en un contenedor aislado en Mint (07/11/2026), y dos scripts de Mint que automatizan la restauración de prueba y la copia periódica con Cron (pasos 10 y 11; funcionamiento informado por Andrés, evidencia por archivar). **Siguen pendientes** la copia y restauración de los archivos de WordPress (`wp-content`), la restauración visible por HTTPS, la reducción del ACL y la revisión de un compañero. La restauración se probó solo para la base de datos. Por eso C05 no está aprobado. Política y contrato completo en [respaldo y restauración](06-respaldo-y-restauracion.md).
 
 ## Decisiones y limitaciones
 
@@ -30,7 +30,8 @@ Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base d
 | Tamaños observados | Volcado ≈ 1,2 MB; copia de archivos ≈ 10,5 MB; 11 GB libres de 23 GB |
 | Copia externa | Mint `axel@cooperativa-mint` trae a `~/copia-cooperativa` por `rsync` + SSH al servidor `192.168.50.1` (red interna). La primera Mint de prueba llegaba por la IP de Tailscale `100.78.86.80` a través de su anfitrión; la Mint del proyecto no, y usa `192.168.50.1` |
 | Clave de respaldo | `~/.ssh/id_respaldos` en Mint (ed25519, sin frase); en el servidor, línea de `authorized_keys` con `restrict,command="/usr/bin/rrsync -ro /var/backups/cooperativa"` (la instala el administrador) |
-| Restauración de prueba | Contenedor `bd-restauracion` (`mariadb:11.8.9`, sin puertos publicados) en Mint, base `cooperativa_wp` vacía |
+| Restauración de prueba | Contenedor `bd-restauracion` (`mariadb:11.8.9`, sin puertos publicados) en Mint, base `cooperativa_wp` vacía; automatizada con [restaurar-prueba-mint.sh](../scripts/restaurar-prueba-mint.sh) |
+| Copia periódica en Mint | [copiar-respaldos-mint.sh](../scripts/copiar-respaldos-mint.sh) con Cron `15 * * * *` ([mint-copia.cron](../config/cron/mint-copia.cron)); log `~/copia-cooperativa.log`; retención 30 por tipo |
 
 ## Pasos
 
@@ -189,11 +190,7 @@ cd ~/copia-cooperativa && sha256sum -c bd-AAAAMMDD-HHMMSS.sql.gz.sha256
 
 La primera vez, `ssh` pregunta si se confía en la huella del servidor: compararla con la del administrador antes de aceptar. Si el puerto 22 se rechaza (`Connection refused`), reintentar pasado un momento y comprobar que se usa la IP correcta para esa Mint.
 
-Cron en la Mint (pendiente de observar), sobre la tarea del servidor de las 03:00 CR; Mint usa su hora local:
-
-```bash
-(crontab -l 2>/dev/null; echo '15 3 * * * rsync -a --exclude=.lock -e "ssh -i $HOME/.ssh/id_respaldos" ftp-andrews@192.168.50.1:/ $HOME/copia-cooperativa/ >> $HOME/copia-cooperativa.log 2>&1') | crontab -
-```
+Para que la Mint traiga las copias sola, con verificación y retención, ver el [paso 11](#11-copia-periódica-en-mint-con-cron).
 
 ### 9. Restauración aislada de la BD en Mint
 
@@ -245,6 +242,68 @@ sudo docker rm -f bd-restauracion; unset CLAVE
 
 Restaurar sobre el sitio real (servidor de reemplazo) sería otro procedimiento: levantar la pila con `docker compose up -d` desde un `.env` propio, que crea la base y el usuario `cooperativa_web` sobre un volumen vacío, y cargar el volcado ahí. Eso no se ha probado.
 
+### 10. Restauración de prueba con un script
+
+[scripts/restaurar-prueba-mint.sh](../scripts/restaurar-prueba-mint.sh) ejecuta el paso 9 completo y se detiene si algo falla. No está en el servidor: se instala en la Mint.
+
+Crear el archivo (la Mint no tiene el repositorio): abrir `cat > ~/restaurar-prueba-mint.sh <<'EOF'`, pegar el contenido del script y cerrar con una línea `EOF`. El script no tiene tildes ni asteriscos porque se pierden al pegar por SSH. Comprobar que quedó igual al del repositorio y dar permisos:
+
+```bash
+sha256sum ~/restaurar-prueba-mint.sh
+```
+
+```bash
+bash -n ~/restaurar-prueba-mint.sh && echo SINTAXIS_OK; chmod 750 ~/restaurar-prueba-mint.sh
+```
+
+El hash debe coincidir con `sha256sum scripts/restaurar-prueba-mint.sh` en el repositorio. Ejecutarlo:
+
+```bash
+~/restaurar-prueba-mint.sh
+```
+
+Opciones: `--traer` (hace antes el `rsync` del paso 8), `--conservar` (no borra el contenedor al final) y, como argumento, la ruta de un volcado concreto en vez del más reciente.
+
+Lo que hace, en orden:
+
+1. Elige el volcado más reciente (o el indicado) y exige su `.sha256`: verifica el hash y hace `gzip -t`. Si algo no coincide, termina sin cargar nada.
+2. Crea `bd-restauracion` con una clave aleatoria que no se imprime ni se guarda. Si el contenedor se detiene durante el arranque (el caso de `Unable to start server.`), lo elimina y lo repite hasta 3 veces, esperando hasta 120 s en cada intento.
+3. Carga el volcado, mide el tiempo y revisa el código de salida de `zcat` y de `mariadb`.
+4. Cuenta las tablas y lee `blogname`, `siteurl` y el número de usuarios de WordPress. Termina con código distinto de 0 si no hay tablas, no hay usuarios o `siteurl` está vacío.
+5. Elimina el contenedor (salvo `--conservar`) y registra todo en `~/restauracion-prueba.log`.
+
+Límites: solo cubre la BD. Usa `docker` si el usuario puede, o `sudo docker`; por eso no sirve para Cron sin permiso de Docker (el `sudo` pediría contraseña). Dar a `axel` el grupo `docker` en la Mint de pruebas permitiría programarlo, a costa de darle permisos de root en esa VM; no se ha hecho.
+
+### 11. Copia periódica en Mint con Cron
+
+[scripts/copiar-respaldos-mint.sh](../scripts/copiar-respaldos-mint.sh) hace lo del paso 8 de forma desatendida. Instalación igual que el paso 10 (`~/copiar-respaldos-mint.sh`, hash, `bash -n`, `chmod 750`). Cada ejecución:
+
+1. Toma un bloqueo (`flock`); si hay otra copia en curso, se omite y lo anota.
+2. Ejecuta `rsync` con la clave restringida, `BatchMode` y 15 s de espera de conexión, sin `--delete`.
+3. Comprueba el `.sha256` del volcado más reciente. Si falla, sale con error y **no** aplica la retención.
+4. Conserva los 30 volcados y las 30 copias de archivos más recientes (con sus `.sha256`); los nombres ordenan por fecha. La lógica se comprobó en local con 35 juegos de archivos vacíos: quedaron 30 de cada tipo y se eliminaron los 5 más antiguos.
+5. Escribe cada paso en `~/copia-cooperativa.log`.
+
+Probarlo a mano:
+
+```bash
+~/copiar-respaldos-mint.sh; echo "codigo: $?"; cat ~/copia-cooperativa.log
+```
+
+Probar Cron con un horario corto. Revisar antes con `crontab -l` que no haya otras tareas que se pisen; esta línea añade la prueba al crontab existente:
+
+```bash
+(crontab -l 2>/dev/null; echo '*/2 * * * * "$HOME/copiar-respaldos-mint.sh"') | crontab -
+```
+
+Esperar unos 5 minutos sin ejecutar nada a mano y revisar `tail -n 12 ~/copia-cooperativa.log`: bloques `INICIO` ... `FIN codigo 0` en minutos pares. Después, el horario definitivo (cada hora, al minuto 15), que reemplaza todo el crontab de ese usuario:
+
+```bash
+echo '15 * * * * "$HOME/copiar-respaldos-mint.sh"' | crontab -
+```
+
+Se programa cada hora y no una vez al día porque Cron no recupera una ejecución perdida si la VM está apagada a la hora fijada, y `rsync` solo copia lo nuevo. La fuente de la línea es [mint-copia.cron](../config/cron/mint-copia.cron). La hora de la Mint es la local de Costa Rica; el servidor genera la copia a las 03:00 y la primera pasada por hora posterior la trae.
+
 ## Validación
 
 - Resultado esperado: el respaldo se genera solo por Cron, con volcado válido y hash correcto, y la retención mantiene 7 copias de cada tipo.
@@ -256,6 +315,7 @@ Restaurar sobre el sitio real (servidor de reemplazo) sería otro procedimiento:
   - Horario definitivo `0 9 * * *`: el volcado `bd-20261106-090002.sql.gz` (1,2 MB, 03:00 hora de Costa Rica del 06/11) lo generó esa ejecución nocturna y se usó en la restauración.
   - Copia externa, 07/11/2026: `rsync` con la clave restringida trajo los volcados a `~/copia-cooperativa` en la Mint del proyecto.
   - Restauración aislada en Mint, 07/11/2026: la carga del volcado tardó **22,9 s** (`real`) en el contenedor `bd-restauracion`; `SHOW TABLES` dio 28 líneas (27 tablas y la cabecera); `blogname` = «Cooperativa Agricola Nicoya», `home` y `siteurl` = `https://cooperativa.internal`; `wp_users` tiene 4 filas. El primer arranque del contenedor falló con `Unable to start server.` en la VM lenta y funcionó al repetirlo con una espera mayor.
+  - Scripts de Mint, 07/11/2026: Andrés informó que `restaurar-prueba-mint.sh` y `copiar-respaldos-mint.sh` (con su Cron) funcionaron en la Mint del proyecto. **Sus salidas y el log de Cron no se transcribieron**, así que no hay evidencia archivada de esas ejecuciones; falta adjuntarla.
 - Evidencia: [salida transcrita del volcado, la incidencia y Cron](../evidencias/respaldos/C05-T05-cron-volcado-2026-11-03.txt), [de la primera copia de archivos](../evidencias/respaldos/C05-T05-script-manual-2026-10-30.txt) y [de la restauración en Mint](../evidencias/respaldos/C05-T05-restauracion-mint-2026-11-07.txt). Registro: [T05](../pruebas/registros/T05-C05-2026-11-03.md). Commit de configuración: pendiente de commit.
 - Responsable: Andrés. Revisor: por asignar.
 
@@ -282,7 +342,7 @@ La causa exacta de por qué se bloquea la salida capturada no se determinó. El 
 1. Respaldar `wp-content` (medir su tamaño y dar permiso de lectura a la cuenta de respaldo) y restaurarlo junto a la BD. `wp-config.php` se regenera desde `.env` y no hace falta copiarlo.
 2. Restauración completa visible por HTTPS (Apache, certificado, WordPress, BD y DNS) en un servidor de reemplazo.
 3. Restaurar la copia de archivos de la BD (`.tar.gz`) para decidir si se conserva como respaldo secundario.
-4. Cron del lado de Mint (`15 3 * * *`) y su retención; quitar la tarea de clase de la primera Mint.
+4. Archivar la evidencia (salida del script de restauración y `~/copia-cooperativa.log` con varias ejecuciones de Cron) de los pasos 10 y 11; quitar la tarea de clase de la primera Mint si existe. Decidir si se programa también la prueba de restauración (requiere permiso de Docker para `axel`).
 5. Reducir el ACL de `ftp-andrews` sobre la carpeta de datos a lectura.
 6. Guardar fuera del repositorio una copia de `.env` y del material TLS, o regenerar el TLS con `scripts/preparar-tls.sh` y reinstalar la CA en los clientes.
 7. Revisión de un compañero.
