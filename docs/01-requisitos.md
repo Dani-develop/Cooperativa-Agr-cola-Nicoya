@@ -15,7 +15,7 @@ Fuente principal: enunciado del Proyecto de Curso, requisitos comunes y escenari
 | E03 | Cinco entradas o páginas agrícolas genuinas como mínimo | Inventario publicado con contenido revisado, autoría y fuentes | [T09](../pruebas/registros/T09-E03-2026-10-28.md) | Implementado; textos con fuentes redactados en Git, falta pegarlos en WordPress; revisión pendiente | Ari |
 | E04 | Plugin relevante instalado y configurado | Función útil demostrada desde el sitio, con versión y licencia registradas | [T10](../pruebas/registros/T10-E04-2026-10-28.md) | Probado con observaciones (envío público, confirmación y entrada guardada); licencias pendientes | Ari |
 | E05 | Dos roles distintos y límites demostrados | Autor publica lo propio; no edita lo ajeno ni administra plugins; Editor opera contenido | [T11](../pruebas/registros/T11-E05-2026-10-28.md) | Parcial; denegaciones capturadas sin identidad visible de sesión y sin segundo Autor | Ari |
-| E06 | Justificación de software libre para toda la solución | Comparación contextual de alternativas, licencias, soporte y costo total | [T12](../pruebas/casos.md#t12) | Pendiente | Por asignar |
+| E06 | Justificación de software libre para toda la solución | Comparación contextual de alternativas, licencias, soporte y costo total | [T12](../pruebas/registros/T12-E06-2026-11-07.md) | Documentado el 07/11/2026; revisión pendiente | Daniel (sorteo 07/11/2026) |
 
 Estados: pendiente, implementado, probado, documentado, reproducido. Un requisito cerrado necesita fecha, revisor y enlace al registro de prueba; no se cierra por tener una carpeta o una captura sin contexto.
 

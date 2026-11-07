@@ -17,7 +17,7 @@ Los procedimientos están en [casos de prueba](../pruebas/casos.md) y los archiv
 | T09 | Parcial: cinco páginas y tres entradas publicadas; faltan textos, fuentes y URL | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Contenido](../pruebas/registros/T09-E03-2026-10-28.md) | Por asignar |
 | T10 | Probado con observaciones: envío público, confirmación y entrada guardada el 07/11/2026; faltan licencias | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Plugin](../pruebas/registros/T10-E04-2026-10-28.md) | Por asignar |
 | T11 | Parcial: denegaciones capturadas, pero sin identidad visible de la sesión ni segundo Autor | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Roles](../pruebas/registros/T11-E05-2026-10-28.md) | Por asignar |
-| T12 | Pendiente | | | | |
+| T12 | Cumplido en el documento técnico; revisión pendiente | 2026-11-07 / cooperativa-server | `9674c2b` | [Justificación](../pruebas/registros/T12-E06-2026-11-07.md) | Daniel (sorteo 07/11/2026) |
 | T13 | Parcial: DNS/HTTPS/Docker/datos; integral pendiente | 2026-10-24 / Ubuntu + Mint | `9f1ac00` | [Reinicio técnico en T03](../pruebas/registros/T03-C03-2026-10-24.md) | Frander, pendiente |
 
 ## Formato del registro
