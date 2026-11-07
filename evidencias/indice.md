@@ -12,11 +12,11 @@ Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o 
 | C04-T04 | FTP por integrante o rol con aislamiento | Pendiente | | | | |
 | C05-T05 | Respaldo de BD automático con Cron y restauración | Pendiente | | | | |
 | C06-T06 | Documentación técnica reproducible y diagramas | Pendiente | | | | |
-| E01-T07 | Tema con logo y colores propios | Implementado; evidencia parcial | [WordPress](wordpress/README.md), [T07](../pruebas/registros/T07-E01-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
-| E02-T08 | Menú con al menos cuatro secciones | Implementado; evidencia parcial | [WordPress](wordpress/README.md), [T08](../pruebas/registros/T08-E02-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
+| E01-T07 | Tema con logo y colores propios | Implementado; evidencia casi completa (falta logo de plantilla y tablet) | [WordPress](wordpress/README.md), [T07](../pruebas/registros/T07-E01-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
+| E02-T08 | Menú con al menos cuatro secciones | Implementado; evidencia casi completa (falta logo de plantilla y tablet) | [WordPress](wordpress/README.md), [T08](../pruebas/registros/T08-E02-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
 | E03-T09 | Cinco entradas o páginas agrícolas genuinas como mínimo | Implementado; contenido y fuentes por comprobar | [WordPress](wordpress/README.md), [T09](../pruebas/registros/T09-E03-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
-| E04-T10 | Plugin relevante instalado y configurado | Probado en parte | [WordPress](wordpress/README.md), [T10](../pruebas/registros/T10-E04-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
-| E05-T11 | Dos roles distintos y límites demostrados | Cuentas creadas; límites sin probar | [WordPress](wordpress/README.md), [T11](../pruebas/registros/T11-E05-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
+| E04-T10 | Plugin relevante instalado y configurado | Probado con observaciones | [WordPress](wordpress/README.md), [T10](../pruebas/registros/T10-E04-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
+| E05-T11 | Dos roles distintos y límites demostrados | Límites capturados; faltan identidad de sesión y segundo Autor | [WordPress](wordpress/README.md), [T11](../pruebas/registros/T11-E05-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
 | E06-T12 | Justificación de software libre para toda la solución | Pendiente | | | | |
 
 Carpetas: [DNS](dns/README.md), [HTTPS](https/README.md), [Docker](docker/README.md), [WordPress](wordpress/README.md), [FTP](ftp/README.md), [respaldos](respaldos/README.md) y [reproducción](reproduccion/README.md).

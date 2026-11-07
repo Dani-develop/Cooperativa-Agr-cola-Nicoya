@@ -63,15 +63,31 @@ Capturadas por Ari el 02 y 03/11/2026 sobre `https://cooperativa.internal`. Se o
 | [WPFormsDB](E04-T10-wpformsdb-cinco-entradas.png) | 5 entradas, la última del 02/11/2026 |
 | [Entradas](E03-T09-entradas-lista-2026-11-03.png), [Páginas](E03-T09-paginas-lista-2026-11-03.png) | 5 entradas publicadas (autores Ari Admin y `campo_nicoya`) y 5 páginas publicadas |
 
-## Evidencia que falta (actualizada 03/11/2026)
+## Capturas del 07/11/2026 (tercera tanda)
+
+Capturadas por Ari en la madrugada del 07/11/2026. Revisión humana pendiente.
+
+| Archivo | Qué demuestra |
+|---|---|
+| [Astra activo](E01-T07-astra-activo-version-4-14-2.png) | Astra 4.14.2, "Active Theme" |
+| [Inicio público](E01-T07-inicio-publico-2026-11-07.png), [icono del sitio](E01-T07-icono-sitio-pestana.png) | Icono del sitio con el logo en la pestaña y la barra de WordPress; el encabezado **no** muestra logo |
+| [Inicio móvil](E01-T07-inicio-movil.png) | Vista de unos 380 px con menú hamburguesa; la imagen de portada móvil parece de plantilla |
+| [Contáctenos](E02-T08-contactenos-destino-contact.png) | Destino `/contact/`; el encabezado muestra el logo de plantilla "GREEN GARDENER" |
+| [Consola](E04-T10-consola-sin-errores.png), [llenado](E04-T10-formulario-prueba-llenado.png), [confirmación](E04-T10-confirmacion-envio.png), [WPFormsDB](E04-T10-wpformsdb-entrada-2026-11-07.png) | Envío de prueba del 07/11/2026 00:48:41 con confirmación y entrada guardada; la consola solo tiene una advertencia |
+| [Autor 1 entrada](E05-T11-autor1-entrada-propia.png) | Entrada "Prueba de rol Autor 1" de `campo_nicoya` |
+| [Edición ajena](E05-T11-autor-edicion-ajena-denegada.png), [plugins](E05-T11-autor-plugins-denegado.png), [users](E05-T11-autor-users-denegado.png) | Denegaciones atribuidas por Ari a un Autor; **la sesión no se ve** en estas capturas |
+| [Editor edita](E05-T11-editor-edita-entrada-2961.png) | `admin_oficina` guarda "Prueba de rol Autor 2,,"; el campo Autor de la entrada dice `admin_oficina` |
+| [Editor plugins](E05-T11-editor-plugins-denegado.png), [users](E05-T11-editor-users-denegado.png) | Denegaciones en ventana privada, usuario no visible |
+
+## Evidencia que falta (actualizada 07/11/2026)
 
 | Requisito | Falta |
 |---|---|
-| E01 | Versión de Astra y captura de Apariencia > Temas con Astra activo; logo en el **encabezado** (hoy solo está en el pie) o declarar que va en el pie; misma página en móvil/tablet |
-| E02 | Captura del clic en "Contáctenos" que muestre la URL de destino; capturas de Inicio con URL `https://` visible ya existen |
-| E03 | Pegar en WordPress los textos de `contenido/entradas/` (con fuentes); texto fuente de Nuestros Productos; revisor |
-| E04 | Mensaje de confirmación tras enviar; el formulario público muestra aviso de JavaScript y campos sin estilo: repetir captura con la página cargada; licencias de WPFormsDB y plugins |
-| E05 | Pruebas de denegación con sesiones separadas (Autor y Editor). Ya hay dos Autores con entradas propias (`campo_nicoya` publica dos) pero falta un segundo usuario Autor |
+| E01 | Quitar o reemplazar el logo "GREEN GARDENER" de plantilla en Contacto y la imagen de portada móvil de plantilla (marca y licencia de terceros); decidir si el logo va en el encabezado; vista de tablet |
+| E02 | Completo salvo revisión humana |
+| E03 | Pegar en WordPress los textos de `contenido/entradas/`; texto fuente de Nuestros Productos; revisor |
+| E04 | Licencias de WPFormsDB y de los plugins; la nota "Please enable JavaScript" sigue visible aunque el formulario funciona |
+| E05 | Mostrar la identidad en cada sesión (por ejemplo, el escritorio con "Hola, usuario" justo antes de cada denegación); lista de Usuarios con un **segundo Autor** real; repetir D5 sobre la entrada de `campo_nicoya`, no sobre una entrada cuyo autor es `admin_oficina` |
 | Medios | Términos de uso de DALL·E 3 (videos excluidos de la entrega) |
 
 Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. [Índice general](../indice.md).
