@@ -4,7 +4,7 @@ Proyecto del curso **EIF431O - Administración de Servidores basados en Software
 
 Un portal agrícola administrado por las oficinas de campo y la administración de la cooperativa, con publicación por roles, transferencia de archivos aislada y recuperación mediante respaldos.
 
-**Estado al 18/10/2026: estructura documental inicial.** La arquitectura está acordada; la infraestructura del proyecto aún no ha sido instalada ni probada. Los 12 requisitos están pendientes de aceptación. El trabajo previo de los laboratorios sirve como referencia y no se presenta como evidencia del proyecto.
+**Estado de esta rama al 24/10/2026:** continúa el trabajo de Axel (`feature/c01-dns-axel`, base `c265221`). C01 conserva su aprobación y sus archivos. Daniel incorpora C02/C03: WordPress y MariaDB en Docker, volúmenes persistentes y Apache HTTPS, con pruebas desde Mint. La revisión humana de Frander sigue pendiente. FTP, Cron/restauración, personalización, contenido, plugin, roles y reproducción independiente todavía no están aceptados.
 
 ## Empezar aquí
 
@@ -14,6 +14,7 @@ Un portal agrícola administrado por las oficinas de campo y la administración 
 4. Discutir el [plan inicial del 18 al 20 de octubre](docs/12-plan-18-20-octubre.md).
 5. Completar el [inventario real](docs/inventario.md) antes de desplegar.
 6. Desarrollar y comprobar la [guía de instalación](docs/03-guia-instalacion.md) por bloques.
+7. Para continuar las VMs de Axel con el trabajo de Daniel: [procedimiento y traspaso C02/C03](docs/13-daniel-wordpress-https.md), [resultados](docs/08-pruebas-y-resultados.md) y [evidencias](evidencias/indice.md).
 
 La entrega está prevista para el **7 de noviembre de 2026**: infraestructura funcionando, documento técnico y presentación. Ver [entregables](entregables/README.md).
 
@@ -32,7 +33,7 @@ flowchart LR
     R --> O[Copia protegida en otro equipo]
 ```
 
-Dominio propuesto: `cooperativa.internal`. Ubuntu `192.168.50.1`, Mint `192.168.50.2` y puerto local `8082` son valores propuestos, pendientes de validar en el inventario. Se usará una VM dedicada, conservando los laboratorios anteriores.
+Dominio efectivo: `cooperativa.internal`. Ubuntu `192.168.50.1`, Mint `192.168.50.100` por DHCP y backend `127.0.0.1:8082`. Las copias se llaman `cooperativa-server-daniel` y `cooperativa-mint-daniel`; conservan la red interna y las MAC de Axel. El diagrama incluye FTP y respaldos como objetivo pendiente. Consultar el [inventario](docs/inventario.md) antes de encender otra pareja con las mismas direcciones.
 
 ## Qué contiene el repositorio
 
@@ -40,17 +41,17 @@ Dominio propuesto: `cooperativa.internal`. Ubuntu `192.168.50.1`, Mint `192.168.
 |---|---|
 | [docs/](docs/README.md) | Procedimientos, requisitos, decisiones y defensa. |
 | [config/](config/README.md) | Fuentes de configuración de BIND9, Apache, FTP y Cron. |
-| [compose.yaml](compose.yaml) | Borrador de los dos servicios y sus volúmenes; sin despliegue validado. |
+| [compose.yaml](compose.yaml) | Dos servicios probados, imágenes fijadas por digest y volúmenes con nombre. |
 | [.env.example](.env.example) | Variables explicadas y credenciales vacías. |
-| [scripts/](scripts/README.md) | Inventario de solo lectura y contratos de automatización pendientes. |
+| [scripts/](scripts/README.md) | Inventario, emisión TLS e inicialización técnica; respaldo/restauración pendientes. |
 | [contenido/](contenido/README.md) | Textos, medios autorizados y registro editorial. |
 | [pruebas/](pruebas/casos.md) | Pruebas permitidas/denegadas y criterios de aceptación. |
 | [evidencias/](evidencias/indice.md) | Índice de evidencias por requisito, prueba y commit. |
 | [entregables/](entregables/README.md) | Documento técnico y presentación para Aula Virtual. |
 
-El primer archivo ejecutable es un inventario **de solo lectura**: `bash scripts/preflight.sh`, dentro de la VM Ubuntu. Los scripts de instalación, respaldo, restauración y verificación integral están deshabilitados con salida 2 hasta implementarlos y probarlos. No informan éxitos ficticios.
+El inventario **de solo lectura** es `bash scripts/preflight.sh`, dentro de Ubuntu. `preparar-tls.sh` y `bootstrap-wordpress.sh` se implementaron para la instalación inicial; se niegan a reemplazar material TLS o un sitio ya existente. Los scripts de respaldo, restauración y verificación integral siguen deshabilitados con salida 2.
 
-`compose.yaml` requiere variables y contraseñas locales. Su presencia no significa que el sitio esté construido: aún faltan DNS, certificado, configuración del proxy, contenido, FTP y respaldos. No ejecutar el despliegue antes de cerrar los prerrequisitos de la guía.
+`compose.yaml` requiere variables y contraseñas locales. El sitio técnico conserva la apariencia y los ejemplos iniciales de WordPress; eso no acredita los requisitos editoriales E01-E05. No publicar `.env`, claves, cookies, la BD ni las VMs. No usar `down -v` en la pareja de continuidad.
 
 ## Forma de trabajo
 

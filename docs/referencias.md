@@ -24,3 +24,13 @@ Consultadas al preparar el plan, 18/10/2026; volver a comprobar al fijar la impl
 - [FooGallery: candidato del directorio oficial](https://wordpress.org/plugins/foogallery/).
 
 Agregar documentación BIND9/Apache y fuentes agrícolas específicas cuando se seleccionen y se usen. Cada precio, imagen y recomendación técnica del contenido debe tener su fuente/autoría.
+
+## Fuentes utilizadas por Daniel, 23-24/10/2026
+
+- [Instalar Docker Engine en Ubuntu](https://docs.docker.com/engine/install/ubuntu/): repositorio oficial, clave y plugin Compose para la versión observada.
+- [Apache mod_proxy](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) y [mod_ssl](https://httpd.apache.org/docs/2.4/mod/mod_ssl.html): proxy inverso y terminación TLS.
+- [WordPress wp_install](https://developer.wordpress.org/reference/functions/wp_install/), [wp_upload_bits](https://developer.wordpress.org/reference/functions/wp_upload_bits/) y [wp_insert_attachment](https://developer.wordpress.org/reference/functions/wp_insert_attachment/): instalación técnica y objetos de prueba de persistencia.
+- [Firefox Certificates policy](https://firefox-admin-docs.mozilla.org/reference/policies/certificates/): `Certificates.Install` con ruta completa para Linux. `ImportEnterpriseRoots` se limita a Windows/macOS; no se usa para esta VM.
+- [Oracle VirtualBox 7.2: Troubleshooting](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/Troubleshooting.html): compatibilidad/rendimiento con el hipervisor de Windows. Se usa como contexto del diagnóstico, sin atribuirle una causa raíz comprobada ni cambiar la seguridad del host.
+
+Las referencias por digest de las imágenes oficiales están en [.env.example](../.env.example); las versiones realmente ejecutadas y sus resultados se registran en T02/T03. La configuración de las versiones de 2026 debe volver a comprobarse para una instalación futura.

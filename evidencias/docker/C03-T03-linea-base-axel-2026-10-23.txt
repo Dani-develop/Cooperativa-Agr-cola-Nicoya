@@ -1,0 +1,7 @@
+Linea base antes de instalar servicios de Daniel. Capturada 2026-10-23 20:53 Costa Rica (2026-10-24 02:53 UTC).
+2d8b1c82febb7000bd15ffac5cf9945cc802e3bbb0d07bdbe93b30e3ebe574c4  /etc/bind/named.conf.options
+b948b6dcd72c11669ab0ac3c2c32368edb026ddff18a9253c60f3372ea1b452e  /etc/bind/named.conf.local
+d8101893cc4d896e594916893bd4950e93792c89628d549e603842be4fb9b48c  /etc/bind/db.cooperativa.internal
+747f82c23b9d06bca2726098e3e5ad611ea00906df2c2cf9409fdb421116dd19  /etc/netplan/00-installer-config.yaml
+afb6b93b773d603cd127a67a584973a03ff044956ba41df62c232167cbf50ad9  /etc/dhcp/dhcpd.conf
+bb8f5c428a898317870350b2849a2e15d1635a15348d289f12ee1796fe9c5937  /etc/default/isc-dhcp-server

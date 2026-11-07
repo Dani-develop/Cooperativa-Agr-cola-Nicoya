@@ -1,0 +1,77 @@
+Fecha Costa Rica: 2026-10-24T12:07:38-06:00
+cooperativa-server
+Updating 613910a..f2520a6
+Fast-forward
+ scripts/bootstrap-wordpress.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+f2520a6f048025520bd76a1587086c7f0a87edbb
+Docker 29.9.2
+Docker Compose version v5.6.1
+Server version: Apache/2.4.66 (Ubuntu)
+Server built:   2026-10-08T19:55:44
+OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+NAME                             IMAGE                                                                                                   COMMAND                  SERVICE     CREATED              STATUS                        PORTS
+cooperativa-nicoya-bd-1          mariadb:11.8.9@sha256:f16d7a344413e519dff518f27bdb221388f84b0d274c97c4fb5f2cb0dc1b34fa                  "docker-entrypoint.s…"   bd          9 minutes ago        Up About a minute (healthy)   3306/tcp
+cooperativa-nicoya-wordpress-1   wordpress:7.1.3-php8.3-apache@sha256:d42f63cb89ad0eab272c4b393164e63830d0df270009907919f7dcce52b1a20b   "docker-entrypoint.s…"   wordpress   About a minute ago   Up About a minute (healthy)   127.0.0.1:8082->80/tcp
+WordPress=7.1.3 PHP=8.3.36
+DB=11.8.9-MariaDB-ubu2404 nombre=cooperativa_wp usuario=cooperativa_web@%
+Tablas=12
+home=https://cooperativa.internal siteurl=https://cooperativa.internal timezone=America/Costa_Rica
+Forzar_SSL_admin=si
+Admin=daniel_admin
+VirtualHost configuration:
+*:80                   is a NameVirtualHost
+         default server 127.0.1.1 (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost 127.0.1.1 (/etc/apache2/sites-enabled/000-default.conf:1)
+         port 80 namevhost cooperativa.internal (/etc/apache2/sites-enabled/cooperativa.conf:2)
+                 alias www.cooperativa.internal
+*:443                  cooperativa.internal (/etc/apache2/sites-enabled/cooperativa.conf:10)
+ServerRoot: "/etc/apache2"
+Main DocumentRoot: "/var/www/html"
+Main ErrorLog: "/var/log/apache2/error.log"
+Mutex ssl-stapling: using_defaults
+Mutex proxy: using_defaults
+Mutex ssl-cache: using_defaults
+Mutex default: dir="/run/apache2/" mechanism=default 
+Mutex watchdog-callback: using_defaults
+Mutex ssl-stapling-refresh: using_defaults
+PidFile: "/run/apache2/apache2.pid"
+Define: DUMP_VHOSTS
+Define: DUMP_RUN_CFG
+User: name="www-data" id=33
+Group: name="www-data" id=33
+subject=C=CR, ST=Guanacaste, L=Nicoya, O=Proyecto academico EIF431O, CN=cooperativa.internal
+issuer=C=CR, ST=Guanacaste, L=Nicoya, O=Proyecto academico EIF431O, CN=Cooperativa Nicoya CA del laboratorio
+notBefore=Oct 24 18:06:30 2026 GMT
+notAfter=Oct 24 18:06:30 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:cooperativa.internal, DNS:www.cooperativa.internal
+sha256 Fingerprint=C1:7C:CA:F7:3C:9C:5D:7F:6D:A2:2A:78:FB:FC:F7:BE:BA:62:86:6E:15:30:9A:5D:A8:62:81:D2:14:DF:5E:39
+/etc/ssl/certs/cooperativa-nicoya.crt: OK
+Huella de clave publica del certificado: 4a28ac6892f254a8ac3370cc6be55855c6425516c7f963668b7a946c68edb85c  -
+Huella de clave publica derivada de la clave privada: 4a28ac6892f254a8ac3370cc6be55855c6425516c7f963668b7a946c68edb85c  -
+700 axel:axel /srv/cooperativa
+600 axel:axel /srv/cooperativa/.env
+700 root:root /srv/cooperativa/credenciales
+600 root:root /srv/cooperativa/credenciales/admin.env
+600 root:root /etc/ssl/private/cooperativa/ca.key
+600 root:root /etc/ssl/private/cooperativa/servidor.key
+active
+active
+active
+active
+enabled
+enabled
+zone cooperativa.internal/IN: loaded serial 2026102201
+OK
+cooperativa.internal.	604800	IN	SOA	ns.cooperativa.internal. admin.cooperativa.internal. 2026102201 604800 86400 2419200 604800
+LISTEN 0      4096       127.0.0.1:8082      0.0.0.0:*    users:(("docker-proxy",pid=4810,fd=8))                                               
+LISTEN 0      511                *:80              *:*    users:(("apache2",pid=5914,fd=4),("apache2",pid=5913,fd=4),("apache2",pid=1037,fd=4))
+LISTEN 0      511                *:443             *:*    users:(("apache2",pid=5914,fd=6),("apache2",pid=5913,fd=6),("apache2",pid=1037,fd=6))
+2d8b1c82febb7000bd15ffac5cf9945cc802e3bbb0d07bdbe93b30e3ebe574c4  /etc/bind/named.conf.options
+b948b6dcd72c11669ab0ac3c2c32368edb026ddff18a9253c60f3372ea1b452e  /etc/bind/named.conf.local
+d8101893cc4d896e594916893bd4950e93792c89628d549e603842be4fb9b48c  /etc/bind/db.cooperativa.internal
+747f82c23b9d06bca2726098e3e5ad611ea00906df2c2cf9409fdb421116dd19  /etc/netplan/00-installer-config.yaml
+afb6b93b773d603cd127a67a584973a03ff044956ba41df62c232167cbf50ad9  /etc/dhcp/dhcpd.conf
+bb8f5c428a898317870350b2849a2e15d1635a15348d289f12ee1796fe9c5937  /etc/default/isc-dhcp-server
+CPU efectivas: 1

@@ -1,0 +1,1 @@
+bootstrap_existente_exit=2 (esperado 2)

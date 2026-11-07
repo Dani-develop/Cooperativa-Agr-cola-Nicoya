@@ -1,6 +1,6 @@
 # Casos de prueba
 
-Estado de todos los casos: **pendiente de ejecución**. En cada caso registrar máquina, fecha, commit, entrada, salida observada, veredicto y revisor usando la [plantilla](registros/plantilla.md). Los criterios siguientes no son resultados reales.
+T01 conserva la aprobación de Axel. T02/T03 tienen resultados técnicos de Daniel del 24/10/2026, pendientes de revisión de Frander. Los demás casos siguen pendientes; T13 solo tiene una comprobación parcial de las capas ya instaladas. Registrar máquina, fecha, commit, entrada, salida observada, veredicto y revisor usando la [plantilla](registros/plantilla.md). Los criterios siguientes se distinguen de sus registros reales.
 
 <a id="t01"></a>
 
@@ -12,7 +12,7 @@ Procedimiento: Validar configuración y zona. Consultar A y SOA al servidor desd
 
 Esperado: Respuesta autoritativa y resolución normal con la dirección acordada.
 
-Estado: pendiente. Registro y evidencia: por incorporar.
+Estado: aprobado, heredado sin modificar el registro. [T01 de Axel](registros/T01-C01-2026-10-21.md) y [evidencias DNS](../evidencias/dns/README.md).
 
 <a id="t02"></a>
 
@@ -24,7 +24,7 @@ Procedimiento: Probar redirección HTTP, identidad/confianza TLS y sitio/panel p
 
 Esperado: HTTPS correcto y backend directo inaccesible desde el cliente.
 
-Estado: pendiente. Registro y evidencia: por incorporar.
+Estado: probado/documentado, revisión de Frander pendiente. [Registro T02](registros/T02-C02-2026-10-24.md), [evidencias](../evidencias/https/README.md). Repetición automatizada: `bash pruebas/t02-desde-mint.sh`, con CA confiada en Mint. Iniciar sesión también para comprobar el panel autenticado.
 
 <a id="t03"></a>
 
@@ -36,7 +36,7 @@ Procedimiento: Registrar imágenes/digests y datos visibles, crear entrada e ima
 
 Esperado: BD saludable, datos y archivos conservados; versiones registradas.
 
-Estado: pendiente. Registro y evidencia: por incorporar.
+Estado: probado/documentado, revisión de Frander pendiente. [Registro T03](registros/T03-C03-2026-10-24.md), [evidencias](../evidencias/docker/README.md). Procedimiento completo en [guía de Daniel](../docs/13-daniel-wordpress-https.md#9-ejecutar-t03-en-ubuntu).
 
 <a id="t04"></a>
 
@@ -156,4 +156,4 @@ Procedimiento: Con respaldo previo, reiniciar la VM dedicada en ventana acordada
 
 Esperado: Servicios y contenido recuperados según lo documentado.
 
-Estado: pendiente. Registro y evidencia: por incorporar.
+Estado integral: pendiente. El [registro T03](registros/T03-C03-2026-10-24.md) comprueba reinicio de DNS/Apache/Docker y persistencia; todavía faltan FTP, Cron, respaldo previo y aceptación integral.

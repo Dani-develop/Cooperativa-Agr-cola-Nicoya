@@ -1,0 +1,8 @@
+//
+// Do any local configuration here
+//
+
+zone "cooperativa.internal" {
+    type master;
+    file "/etc/bind/db.cooperativa.internal";
+};

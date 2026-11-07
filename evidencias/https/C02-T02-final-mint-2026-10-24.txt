@@ -1,0 +1,9 @@
+Fecha Costa Rica: 2026-10-24T12:25:25-06:00
+cooperativa-mint
+ 12:25:25 up 14 min,  3 users,  load average: 0,08, 0,26, 0,35
+CPU efectivas: 1
+192.168.50.1    cooperativa.internal
+192.168.50.1    www.cooperativa.internal
+alias_final_http=200 tls=0 url=https://cooperativa.internal/
+entrada_tecnica_publica_http=404 (esperado 404 tras pasar a borrador)
+Bloqueos del kernel en este arranque: no observados
