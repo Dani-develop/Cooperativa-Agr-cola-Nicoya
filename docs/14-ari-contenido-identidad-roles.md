@@ -65,3 +65,14 @@ Estado: **ejecutado en el panel el 27 y 28/10/2026; probado en parte**. Cubre E0
 - El aviso de Action Scheduler con acciones vencidas apareció en el panel de WPFormsDB; no se investigó y puede interesar a Cron (C05).
 - Las imágenes del sitio están en el volumen de archivos: confirmar que el respaldo los incluye ([contenido](../contenido/README.md)).
 - Reversión: desactivar el plugin o el tema desde el panel conserva los datos; borrar una página o un usuario no se deshace sin respaldo.
+
+### Estado al cierre (07/11/2026)
+
+El servidor de la VM dejó de estar accesible el 07/11/2026 a la 01:51, por lo que las siguientes acciones quedan **sin hacer**:
+
+- Reemplazar el logo de plantilla "GREEN GARDENER" del encabezado de Contacto y la imagen de portada móvil de plantilla por material propio.
+- Capturar la vista de tablet (768 px).
+- Repetir las denegaciones de roles mostrando la sesión activa (escritorio con "Howdy, usuario" antes de cada una), y listar un segundo Autor real.
+- Repetir la edición del Editor sobre una entrada de `campo_nicoya`, ya que la entrada 2961 tiene autor `admin_oficina`.
+- Pegar en WordPress los textos de `contenido/entradas/`.
+- Verificar licencias de los plugins y de las imágenes generadas con IA.
