@@ -10,16 +10,18 @@ Fuente principal: enunciado del Proyecto de Curso, requisitos comunes y escenari
 | C04 | FTP por integrante o rol con aislamiento | Cuenta A administra lo propio y no modifica ni borra un archivo de B | [T04](../pruebas/casos.md#t04) | Pendiente | Por asignar |
 | C05 | Respaldo de BD automático con Cron y restauración | Ejecución real de Cron y recuperación de datos en destino aislado | [T05](../pruebas/casos.md#t05) | Pendiente | Por asignar |
 | C06 | Documentación técnica reproducible y diagramas | Otro integrante completa una instalación limpia desde la guía | [T06](../pruebas/casos.md#t06) | Pendiente | Por asignar |
-| E01 | Tema con logo y colores propios | Identidad aplicada, legible y comprobada en dos tamaños de pantalla | [T07](../pruebas/casos.md#t07) | Pendiente | Por asignar |
-| E02 | Menú con al menos cuatro secciones | Enlaces reales a contenido publicado, sin destinos de ejemplo | [T08](../pruebas/casos.md#t08) | Pendiente | Por asignar |
-| E03 | Cinco entradas o páginas agrícolas genuinas como mínimo | Inventario publicado con contenido revisado, autoría y fuentes | [T09](../pruebas/casos.md#t09) | Pendiente | Por asignar |
-| E04 | Plugin relevante instalado y configurado | Función útil demostrada desde el sitio, con versión y licencia registradas | [T10](../pruebas/casos.md#t10) | Pendiente | Por asignar |
-| E05 | Dos roles distintos y límites demostrados | Autor publica lo propio; no edita lo ajeno ni administra plugins; Editor opera contenido | [T11](../pruebas/casos.md#t11) | Pendiente | Por asignar |
+| E01 | Tema con logo y colores propios | Identidad aplicada, legible y comprobada en dos tamaños de pantalla | [T07](../pruebas/registros/T07-E01-2026-10-28.md) | Implementado; Astra 4.14.2 y móvil comprobados; logo de plantilla y tablet pendientes, revisión pendiente | Ari |
+| E02 | Menú con al menos cuatro secciones | Enlaces reales a contenido publicado, sin destinos de ejemplo | [T08](../pruebas/registros/T08-E02-2026-10-28.md) | Implementado y comprobado (menú y destinos); revisión pendiente | Ari |
+| E03 | Cinco entradas o páginas agrícolas genuinas como mínimo | Inventario publicado con contenido revisado, autoría y fuentes | [T09](../pruebas/registros/T09-E03-2026-10-28.md) | Implementado; textos con fuentes redactados en Git, falta pegarlos en WordPress; revisión pendiente | Ari |
+| E04 | Plugin relevante instalado y configurado | Función útil demostrada desde el sitio, con versión y licencia registradas | [T10](../pruebas/registros/T10-E04-2026-10-28.md) | Probado con observaciones (envío público, confirmación y entrada guardada); licencias pendientes | Ari |
+| E05 | Dos roles distintos y límites demostrados | Autor publica lo propio; no edita lo ajeno ni administra plugins; Editor opera contenido | [T11](../pruebas/registros/T11-E05-2026-10-28.md) | Parcial; denegaciones capturadas sin identidad visible de sesión y sin segundo Autor | Ari |
 | E06 | Justificación de software libre para toda la solución | Comparación contextual de alternativas, licencias, soporte y costo total | [T12](../pruebas/casos.md#t12) | Pendiente | Por asignar |
 
 Estados: pendiente, implementado, probado, documentado, reproducido. Un requisito cerrado necesita fecha, revisor y enlace al registro de prueba; no se cierra por tener una carpeta o una captura sin contexto.
 
 C02/C03 tienen ejecución técnica del 24/10/2026 en la rama de Daniel. Frander (`FranderCT`) es el revisor previsto y todavía no ha emitido aprobación. C06 recibe esta documentación, pero permanece pendiente de reproducción independiente.
+
+E01-E05 se configuraron en el panel el 27 y 28/10/2026 en la rama `feature/Ari`, desde la de Daniel. Los registros T07-T11 son parciales y enumeran la evidencia que falta; ninguno está aprobado ni revisado.
 
 ## Rúbrica del enunciado
 

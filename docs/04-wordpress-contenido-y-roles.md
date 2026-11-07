@@ -1,6 +1,18 @@
 # WordPress: contenido, identidad y roles
 
-Estado: planificación. Requisitos E01-E05; contenido fuente en [contenido](../contenido/README.md).
+Estado: **implementado en el panel el 27 y 28/10/2026; probado solo en parte**. Requisitos E01-E05; contenido fuente en [contenido](../contenido/README.md). Procedimiento ejecutado en la [guía 14](14-ari-contenido-identidad-roles.md) y resultados en T07-T11 ([índice de evidencias](../evidencias/indice.md)). Las secciones siguientes conservan el plan original; la tabla de abajo indica lo observado.
+
+## Plan y observado
+
+| Requisito | Plan | Observado | Registro |
+|---|---|---|---|
+| E01 | Logo propio y paleta legible | Astra con plantilla de Starter Templates, logo propio y fondo `#E0D7C7` | [T07](../pruebas/registros/T07-E01-2026-10-28.md) |
+| E02 | Menú de cinco secciones propuestas | Menú de cuatro: Inicio, Contacto, Nuestros Productos y Quiénes somos | [T08](../pruebas/registros/T08-E02-2026-10-28.md) |
+| E03 | Cinco páginas y dos noticias de autores distintos | Cinco páginas y tres entradas publicadas, todas de un Administrador | [T09](../pruebas/registros/T09-E03-2026-10-28.md) |
+| E04 | Galería (FooGallery como candidato) | Formulario con WPForms Lite 2.0.3 y WPFormsDB: "Contacto y Pedidos Agrícolas" | [T10](../pruebas/registros/T10-E04-2026-10-28.md) |
+| E05 | Técnica, Editor, Autor A y Autor B | `ari_admin` y `daniel_admin` (Administrador), `admin_oficina` (Editor), `campo_nicoya` (Autor); falta Autor B | [T11](../pruebas/registros/T11-E05-2026-10-28.md) |
+
+Decisión de plugin: se eligió un formulario porque el enunciado lo admite como ejemplo y se puede comprobar con la recepción de una consulta. La página Gallery existe, pero no cuenta como E04 mientras no se compruebe su función.
 
 ## Identidad y navegación
 
