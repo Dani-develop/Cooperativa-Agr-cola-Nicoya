@@ -89,7 +89,7 @@ El 07/11/2026 a la 01:51 el servidor de la VM dejó de estar accesible y no se p
 | E01 | Quitar o reemplazar el logo "GREEN GARDENER" de plantilla en Contacto y la imagen de portada móvil de plantilla (marca y licencia de terceros); decidir si el logo va en el encabezado; vista de tablet |
 | E02 | Completo salvo revisión humana |
 | E03 | Pegar en WordPress los textos de `contenido/entradas/`; texto fuente de Nuestros Productos; revisor |
-| E04 | Licencias de WPFormsDB y de los plugins; la nota "Please enable JavaScript" sigue visible aunque el formulario funciona |
+| E04 | Licencia de Database for WPForms (las demás constan en [docs/14](../../docs/14-ari-contenido-identidad-roles.md)); la nota "Please enable JavaScript" sigue visible aunque el formulario funciona |
 | E05 | Mostrar la identidad en cada sesión (por ejemplo, el escritorio con "Hola, usuario" justo antes de cada denegación); lista de Usuarios con un **segundo Autor** real; repetir D5 sobre la entrada de `campo_nicoya`, no sobre una entrada cuyo autor es `admin_oficina` |
 | Medios | Términos de uso de DALL·E 3 (videos excluidos de la entrega) |
 
