@@ -12,11 +12,11 @@ Los procedimientos están en [casos de prueba](../pruebas/casos.md) y los archiv
 | T04 | Pendiente | | | | |
 | T05 | Pendiente | | | | |
 | T06 | Pendiente | | | | |
-| T07 | Parcial: Astra 4.14.2 y vista móvil probadas; queda logo de plantilla en Contacto y falta tablet | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Identidad](../pruebas/registros/T07-E01-2026-10-28.md) | Por asignar |
-| T08 | Parcial: menú de cuatro secciones; faltan el recorrido de enlaces y quitar el mapa de plantilla | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Menú](../pruebas/registros/T08-E02-2026-10-28.md) | Por asignar |
-| T09 | Parcial: cinco páginas y tres entradas publicadas; faltan textos, fuentes y URL | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Contenido](../pruebas/registros/T09-E03-2026-10-28.md) | Por asignar |
+| T07 | Casi completo: Astra 4.14.2, logo y paleta propios en tres tamaños; en móvil el logo tapa el titular y Productos no apila columnas | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Identidad](../pruebas/registros/T07-E01-2026-10-28.md) | Por asignar |
+| T08 | Probado: cuatro secciones recorridas como visitante; cinco páginas publicadas | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Menú](../pruebas/registros/T08-E02-2026-10-28.md) | Por asignar |
+| T09 | Implementado: cinco páginas y seis entradas publicadas con textos y fuentes; falta URL por pieza y revisor | 2026-10-27/28 / VM Mint | `9674c2b` (el panel no se versiona) | [Contenido](../pruebas/registros/T09-E03-2026-10-28.md) | Por asignar |
 | T10 | Probado con observaciones: envío público, confirmación y entrada guardada el 07/11/2026; faltan licencias | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Plugin](../pruebas/registros/T10-E04-2026-10-28.md) | Por asignar |
-| T11 | Parcial: denegaciones capturadas, pero sin identidad visible de la sesión ni segundo Autor | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Roles](../pruebas/registros/T11-E05-2026-10-28.md) | Por asignar |
+| T11 | Probado: dos Autores, Editor y Administrador con límites demostrados | 2026-10-28 / VM Mint | `9674c2b` (el panel no se versiona) | [Roles](../pruebas/registros/T11-E05-2026-10-28.md) | Por asignar |
 | T12 | Pendiente | | | | |
 | T13 | Parcial: DNS/HTTPS/Docker/datos; integral pendiente | 2026-10-24 / Ubuntu + Mint | `9f1ac00` | [Reinicio técnico en T03](../pruebas/registros/T03-C03-2026-10-24.md) | Frander, pendiente |
 
