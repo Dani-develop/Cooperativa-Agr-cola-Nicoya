@@ -87,11 +87,11 @@ Capturas de roles, menú, logo y vistas responsive, con las evidencias detallada
 
 | Requisito | Falta |
 |---|---|
-| E01 | Corregir la superposición del logo con el titular en móvil y repetir la captura |
-| E02 | Publicar "Nuestros Productos" (figura como borrador en el menú) y verificar los cuatro enlaces como visitante |
+| E01 | Superposición del logo con el titular en móvil: Ari la corregirá después (observación abierta) |
+| E02 | Ari declara que "Nuestros Productos" ya está publicada; falta la captura que lo confirme y los cuatro enlaces como visitante |
 | E03 | URL pública de cada pieza; revisor; confirmar que Nuestros Productos esté publicada |
 | E04 | Licencia de Database for WPForms; el aviso de JavaScript queda como observación cosmética |
-| E05 | Captura del intento directo de edición ajena (`post.php?post=2994&action=edit`) como `campo_nicoya` |
+| E05 | Captura del intento directo de edición ajena (`post.php?post=2994&action=edit`); Ari declara que funciona, sin captura |
 | Medios | Términos de uso de DALL·E 3 (videos excluidos) |
 | General | Redes sociales de Contacto (Facebook, X, Pinterest) por revisar: posibles enlaces de plantilla |
 
