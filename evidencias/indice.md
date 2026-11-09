@@ -16,8 +16,8 @@ Nombre sugerido: `C01-T01-dns-mint-2026-10-21.png`. Guardar capturas legibles o 
 | E02-T08 | Menú con al menos cuatro secciones | Probado: cuatro secciones recorridas como visitante | [WordPress](wordpress/README.md), [T08](../pruebas/registros/T08-E02-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
 | E03-T09 | Cinco entradas o páginas agrícolas genuinas como mínimo | Implementado: seis entradas y cinco páginas con textos y fuentes; revisión pendiente | [WordPress](wordpress/README.md), [T09](../pruebas/registros/T09-E03-2026-10-28.md) | 2026-10-27/28 / VM Mint | `9674c2b` | Pendiente |
 | E04-T10 | Plugin relevante instalado y configurado | Probado con observaciones | [WordPress](wordpress/README.md), [T10](../pruebas/registros/T10-E04-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
-| E06-T12 | Justificación de software libre para toda la solución | Documentado; revisión pendiente | [T12](../pruebas/registros/T12-E06-2026-11-07.md), [docs/09](../docs/09-decisiones-costos-y-licencias.md) | 2026-11-07 / cooperativa-server | `9674c2b` | Daniel (sorteo 07/11/2026) |
 | E05-T11 | Dos roles distintos y límites demostrados | Probado: dos Autores, Editor y Administrador con límites demostrados | [WordPress](wordpress/README.md), [T11](../pruebas/registros/T11-E05-2026-10-28.md) | 2026-10-28 / VM Mint | `9674c2b` | Pendiente |
+| E06-T12 | Justificación de software libre para toda la solución | Documentado; revisión pendiente | [T12](../pruebas/registros/T12-E06-2026-11-07.md), [docs/09](../docs/09-decisiones-costos-y-licencias.md) | 2026-11-07 / cooperativa-server | `9674c2b` | Daniel (sorteo 07/11/2026) |
 
 Carpetas: [DNS](dns/README.md), [HTTPS](https/README.md), [Docker](docker/README.md), [WordPress](wordpress/README.md), [FTP](ftp/README.md), [respaldos](respaldos/README.md) y [reproducción](reproduccion/README.md).
 
