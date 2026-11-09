@@ -91,7 +91,7 @@ Capturas de roles, menú, logo y vistas responsive, con las evidencias detallada
 | E02 | Recorrer los cuatro enlaces como visitante ("Nuestros Productos" ya consta como Publicada en la [lista de páginas](E02-T08-paginas-cinco-publicadas-2026-11-08.png)) |
 | E03 | URL pública de cada pieza; revisor; confirmar que Nuestros Productos esté publicada |
 | E04 | Licencia de Database for WPForms; el aviso de JavaScript queda como observación cosmética |
-| E05 | Captura del intento directo de edición ajena (`post.php?post=2994&action=edit`); Ari declara que funciona, sin captura |
+| E05 | Completo: intento directo de edición ajena capturado ([sesión](E05-T11-autor1-sesion-perfil-2026-11-08.png), [error](E05-T11-autor1-edicion-ajena-denegada-2994.png)) |
 | Medios | Términos de uso de DALL·E 3 (videos excluidos) |
 | General | Redes sociales de Contacto (Facebook, X, Pinterest) por revisar: posibles enlaces de plantilla |
 
