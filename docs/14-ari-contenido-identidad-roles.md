@@ -76,3 +76,20 @@ El servidor de la VM dejó de estar accesible el 07/11/2026 a la 01:51, por lo q
 - Repetir la edición del Editor sobre una entrada de `campo_nicoya`, ya que la entrada 2961 tiene autor `admin_oficina`.
 - Pegar en WordPress los textos de `contenido/entradas/`.
 - Verificar licencias de los plugins y de las imágenes generadas con IA.
+
+## Licencias de los componentes (consulta del 08/11/2026)
+
+Fuente: encabezado `readme.txt` de la versión estable publicada, servido por el espejo de jsDelivr para wordpress.org (`cdn.jsdelivr.net/wp/plugins/<slug>/trunk/readme.txt`). La versión estable puede ser **más nueva** que la instalada (captura del 03/11/2026), así que la licencia de la versión instalada debe confirmarse en Plugins > Instalados.
+
+| Componente | Versión instalada | Estable consultada | Licencia declarada | Observación |
+|---|---|---|---|---|
+| WPForms Lite (`wpforms-lite`) | 2.0.3 | 2.0.3 | GPL v2.0 o posterior | Coincide con la instalada |
+| Starter Templates (`astra-sites`) | 4.7.9 | 4.7.11 | GPLv2 o posterior | Hay actualización |
+| SureForms (`sureforms`) | 2.13.0 | 2.13.1 | GPLv2 o posterior | Hay actualización |
+| SureRank (`surerank`) | 1.10.3 | 1.10.3 | GPLv2 o posterior | Coincide |
+| SureCookie (`surecookie`) | 1.7.0 | 1.8.0 | GPLv2 o posterior | Hay actualización |
+| Spectra (`ultimate-addons-for-gutenberg`) | "Spectra Blocks" 1.0.12 en el panel | 2.20.6 | GPLv2 o posterior | La versión y el nombre no coinciden con el slug consultado; confirmar que sea el mismo plugin |
+| Astra (tema) | 4.14.2 | no consultada | GPL v2 o posterior (style.css de v4.5.0) | Confirmar en la versión instalada |
+| Database for WPForms | 1.1.1 | no consultada | **No verificada** | El readme no se pudo obtener |
+
+Imágenes y logo generados con DALL·E 3: los términos de OpenAI **no se pudieron consultar** (la página rechazó la consulta). Los términos de uso vigentes en https://openai.com/policies/terms-of-use deben leerse por una persona antes de dar la licencia por verificada.

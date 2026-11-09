@@ -79,18 +79,20 @@ Capturadas por Ari en la madrugada del 07/11/2026. Revisión humana pendiente.
 | [Editor edita](E05-T11-editor-edita-entrada-2961.png) | `admin_oficina` guarda "Prueba de rol Autor 2,,"; el campo Autor de la entrada dice `admin_oficina` |
 | [Editor plugins](E05-T11-editor-plugins-denegado.png), [users](E05-T11-editor-users-denegado.png) | Denegaciones en ventana privada, usuario no visible |
 
-## Evidencia que falta (actualizada 07/11/2026)
+## Capturas del 08/11/2026 (cuarta tanda)
 
-El 07/11/2026 a la 01:51 el servidor de la VM dejó de estar accesible y no se pudieron hacer las correcciones ni capturas siguientes. Lo que sigue queda **pendiente** y los registros T07 a T11 conservan su veredicto parcial.
+Capturas de roles, menú, logo y vistas responsive, con las evidencias detalladas en los registros [T07](../../pruebas/registros/T07-E01-2026-10-28.md), [T08](../../pruebas/registros/T08-E02-2026-10-28.md), [T09](../../pruebas/registros/T09-E03-2026-10-28.md) y [T11](../../pruebas/registros/T11-E05-2026-10-28.md). Archivos con sufijo `2026-11-08` y los de `E05-T11-autor*`, `E05-T11-editor*`, `E02-T08-informacion-asociados-publica.png` y `E05-T11-autor2-*`. Se ocultó un correo institucional.
 
+## Evidencia que falta (actualizada 08/11/2026)
 
 | Requisito | Falta |
 |---|---|
-| E01 | Quitar o reemplazar el logo "GREEN GARDENER" de plantilla en Contacto y la imagen de portada móvil de plantilla (marca y licencia de terceros); decidir si el logo va en el encabezado; vista de tablet |
-| E02 | Completo salvo revisión humana |
-| E03 | Pegar en WordPress los textos de `contenido/entradas/`; texto fuente de Nuestros Productos; revisor |
-| E04 | Licencias de WPFormsDB y de los plugins; la nota "Please enable JavaScript" sigue visible aunque el formulario funciona |
-| E05 | Mostrar la identidad en cada sesión (por ejemplo, el escritorio con "Hola, usuario" justo antes de cada denegación); lista de Usuarios con un **segundo Autor** real; repetir D5 sobre la entrada de `campo_nicoya`, no sobre una entrada cuyo autor es `admin_oficina` |
-| Medios | Términos de uso de DALL·E 3 (videos excluidos de la entrega) |
+| E01 | En móvil el logo tapa el titular (Inicio y Contacto) y las columnas de Nuestros Productos no se apilan; Ari lo corregirá después |
+| E02 | Completo: enlaces recorridos como visitante |
+| E03 | URL pública de cada pieza; revisor; confirmar que Nuestros Productos esté publicada |
+| E04 | Licencia de Database for WPForms; el aviso de JavaScript queda como observación cosmética |
+| E05 | Completo: intento directo de edición ajena capturado ([sesión](E05-T11-autor1-sesion-perfil-2026-11-08.png), [error](E05-T11-autor1-edicion-ajena-denegada-2994.png)) |
+| Medios | Términos de uso de DALL·E 3 (videos excluidos) |
+| General | Redes sociales de Contacto (Facebook, X, Pinterest) por revisar: posibles enlaces de plantilla |
 
 Sin registro de prueba, cualquier resultado esperado es criterio de aceptación. [Índice general](../indice.md).
