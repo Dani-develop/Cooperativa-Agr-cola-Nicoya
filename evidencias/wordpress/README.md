@@ -47,7 +47,7 @@ Capturas reales del panel, sin reconstrucción gráfica. Antes de publicarlas se
 | [Crear Autor](E05-T11-usuario-autor-crear.png) | Cuenta `campo_nicoya` con rol Autor (incluye un primer intento con correo repetido) |
 | [Usuarios](E05-T11-usuarios-lista.png) | Lista de usuarios del 28/10/2026 (cuatro); el segundo Autor `campo_liberia` se creó el 08/11/2026 |
 
-## Capturas del 03/11/2026 (segunda tanda)
+## Capturas del 03/11/2026 (segunda tanda; histórico, cifras superadas el 08/11/2026: 6 entradas y 6 envíos en WPFormsDB)
 
 Capturadas por Ari el 02 y 03/11/2026 sobre `https://cooperativa.internal`. Se ocultaron correos y nombres de terceros en WPFormsDB y un elemento ajeno del escritorio. Revisión humana pendiente.
 
