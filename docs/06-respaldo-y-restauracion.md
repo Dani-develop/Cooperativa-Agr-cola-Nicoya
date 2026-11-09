@@ -30,7 +30,7 @@ La entrada se mantendrá en [config/cron](../config/cron/README.md). Probar una 
 2. Generar un respaldo, comprobar integridad básica y conservarlo protegido.
 3. Preparar destino aislado, con volúmenes nuevos y datos de conexión inequívocos.
 4. Restaurar BD, archivos y configuración con versiones compatibles.
-5. Comprobar HTTPS, contenido, imagen, galería, menú y roles contra el estado previo.
+5. Comprobar HTTPS, contenido, imagen, formulario de contacto, menú y roles contra el estado previo.
 6. Medir tiempo y registrar problemas/resultado. Mantener intacto el sitio principal.
 
 Una red aislada puede mantener el dominio para evitar cambiar URLs. Si se cambia, usar una migración compatible con los datos serializados de WordPress. Un exportador de entradas no sustituye la copia completa.

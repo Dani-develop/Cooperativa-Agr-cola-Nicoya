@@ -5,7 +5,7 @@ Estado: guion por ensayar. Ajustar duración cuando el profesor la indique. Todo
 ## Recorrido propuesto
 
 1. Problema de la cooperativa y diagrama del diseño.
-2. DNS real y acceso HTTPS desde Mint; contenido, menú y galería.
+2. DNS real y acceso HTTPS desde Mint; contenido, menú y formulario de contacto.
 3. Autor publica lo propio e intenta una operación ajena denegada; Editor administra contenido permitido.
 4. FTP: archivo propio y modificación/borrado ajeno denegados.
 5. Contenedores, versiones, volúmenes y ausencia de publicación de 3306.
