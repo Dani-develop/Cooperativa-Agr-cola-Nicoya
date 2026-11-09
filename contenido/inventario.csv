@@ -1,12 +1,14 @@
 id,tipo,titulo,archivo_fuente,autor,revisor,estado,url_publicada,fuentes
 P01,pagina,Inicio,paginas/inicio.md,ari_admin,,publicada 2026-10-27; texto recibido sin fuentes,https://cooperativa.internal/,
-P02,pagina,Nuestros Productos,,ari_admin,,publicada; 6 productos visibles 03/11/2026; texto fuente pendiente,,
-P03,pagina,Quiénes somos,paginas/quienes-somos.md,ari_admin,,publicada 2026-10-27; texto recibido sin fuentes,,
-P04,pagina,Gallery,paginas/galeria.md,ari_admin,,publicada 2026-10-27; galería sin comprobar,,
-P05,pagina,Contacto,paginas/contacto.md,ari_admin,,publicada 2026-10-27; contiene un mapa de plantilla; revisar dominio del correo,,
-P06,pagina,Privacy Policy,,daniel_admin,,borrador; creada por WordPress; no cuenta para E03,,
+P02,pagina,Nuestros Productos,,ari_admin,,publicada; 6 productos visibles 03/11/2026; texto fuente pendiente de guardar en Git,https://cooperativa.internal/services/,
+P03,pagina,Quiénes somos,paginas/quienes-somos.md,ari_admin,,publicada 2026-10-27; texto recibido sin fuentes,https://cooperativa.internal/about/,
+P04,pagina,Gallery,paginas/galeria.md,ari_admin,,ya no aparece en la lista de páginas del 08/11/2026 (retirada); el texto se conserva como histórico; no cuenta para E03,,
+P05,pagina,Contacto,paginas/contacto.md,ari_admin,,publicada 2026-10-27; mapa de plantilla reemplazado por la Universidad Nacional (T08); formulario de T10; datos de contacto ilustrativos,https://cooperativa.internal/contact/,
+P06,pagina,Privacy Policy,,daniel_admin,,ya no aparece en la lista de páginas del 08/11/2026; no contaba para E03,,
 N01,entrada,Asamblea general ordinaria y balance financiero anual,entradas/N01-asamblea-general.md,ari_admin,,"publicada (panel 03/11/2026); texto redactado 07/11/2026, revisión pendiente",,https://costa-rica.justia.com/nacionales/leyes/ley-4179/gdoc
 N02,entrada,Rutas del camión de transporte para comunidades rurales,entradas/N02-rutas-camion.md,campo_nicoya,,"publicada (panel 03/11/2026); texto redactado 07/11/2026, revisión pendiente",,ninguna (simulado)
 N03,entrada,Llegada de insumos agrícolas y biofertilizantes al almacén central,entradas/N03-insumos-biofertilizantes.md,ari_admin,,"publicada (panel 03/11/2026); texto redactado 07/11/2026, revisión pendiente",,https://www.mag.go.cr/RESOLUCION%20ADMINISTRATIVA-MAG-DM-RA-020-2026%20FERTILIZANTES%20Y%20ENMIENDAS%20GAUDI%20VJCP%20FIRMADO.pdf
 N04,entrada,Taller de conservación hídrica y manejo de suelos en Guanacaste,entradas/N04-taller-conservacion-hidrica.md,ari_admin,,"publicada (panel 03/11/2026); texto redactado 07/11/2026, revisión pendiente",,https://delfino.cr/2025/10/fao-mag-e-inta-impulsan-estrategia-conjunta-para-fortalecer-la-resiliencia-agropecuaria-en-guanacaste
 N05,entrada,Recepción de cosechas de granos básicos temporada 2026-2027,entradas/N05-recepcion-cosechas.md,campo_nicoya,,"publicada (panel 03/11/2026); texto redactado 07/11/2026, revisión pendiente",,https://inta.gob.ni/wp-content/uploads/2026/02/Postcosecha-de-Granos-Basicos.pdf
+P07,pagina,Información para Asociados,,ari_admin,,publicada (lista de páginas 08/11/2026); página informativa pública; texto fuente pendiente de guardar en Git,https://cooperativa.internal/asociados/,https://costa-rica.justia.com/nacionales/leyes/ley-4179/gdoc
+N06,entrada,Cómo almacenar frijol y maíz sin perder calidad,entradas/N06-almacenamiento-granos.md,campo_liberia,,"publicada por el segundo Autor (T11, 08/11/2026); texto redactado 08/11/2026, revisión pendiente",,https://inta.gob.ni/wp-content/uploads/2026/02/Postcosecha-de-Granos-Basicos.pdf

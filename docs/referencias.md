@@ -21,7 +21,7 @@ Consultadas al preparar el plan, 18/10/2026; volver a comprobar al fijar la impl
 - [FTP y FTPS en Ubuntu](https://documentation.ubuntu.com/server/how-to/networking/ftp/index.html).
 - [mariadb-dump](https://mariadb.com/docs/server/clients-and-utilities/backup-restore-and-import-clients/mariadb-dump).
 - [Restauración MariaDB](https://mariadb.com/docs/server/mariadb-quickstart-guides/mariadb-restore-guide).
-- [FooGallery: candidato del directorio oficial](https://wordpress.org/plugins/foogallery/).
+- [FooGallery: candidato del directorio oficial](https://wordpress.org/plugins/foogallery/) (descartado; se eligió un formulario).
 
 Agregar documentación BIND9/Apache y fuentes agrícolas específicas cuando se seleccionen y se usen. Cada precio, imagen y recomendación técnica del contenido debe tener su fuente/autoría.
 
