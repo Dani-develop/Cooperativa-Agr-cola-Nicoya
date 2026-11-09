@@ -87,8 +87,8 @@ Capturas de roles, menú, logo y vistas responsive, con las evidencias detallada
 
 | Requisito | Falta |
 |---|---|
-| E01 | Superposición del logo con el titular en móvil: Ari la corregirá después (observación abierta) |
-| E02 | Recorrer los cuatro enlaces como visitante ("Nuestros Productos" ya consta como Publicada en la [lista de páginas](E02-T08-paginas-cinco-publicadas-2026-11-08.png)) |
+| E01 | En móvil el logo tapa el titular (Inicio y Contacto) y las columnas de Nuestros Productos no se apilan; Ari lo corregirá después |
+| E02 | Completo: enlaces recorridos como visitante |
 | E03 | URL pública de cada pieza; revisor; confirmar que Nuestros Productos esté publicada |
 | E04 | Licencia de Database for WPForms; el aviso de JavaScript queda como observación cosmética |
 | E05 | Completo: intento directo de edición ajena capturado ([sesión](E05-T11-autor1-sesion-perfil-2026-11-08.png), [error](E05-T11-autor1-edicion-ajena-denegada-2994.png)) |
