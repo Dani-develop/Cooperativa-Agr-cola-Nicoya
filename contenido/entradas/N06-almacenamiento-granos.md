@@ -1,4 +1,4 @@
-<!-- Estado: texto redactado por Claude a pedido de Ari el 08/11/2026 a partir de la fuente listada; revisión humana pendiente. Autor en WordPress: segundo usuario Autor (por crear). Los datos del caso son simulados. -->
+<!-- Estado: texto redactado por Claude a pedido de Ari el 08/11/2026 a partir de la fuente listada; revisión humana pendiente. Autor en WordPress: campo_liberia (segundo Autor, publicada el 08/11/2026, ver T11). Los datos del caso son simulados. -->
 
 # Cómo almacenar frijol y maíz sin perder calidad
 

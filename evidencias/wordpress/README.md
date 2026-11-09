@@ -45,7 +45,7 @@ Capturas reales del panel, sin reconstrucción gráfica. Antes de publicarlas se
 |---|---|
 | [Crear Editor](E05-T11-usuario-editor-crear.png) | Cuenta `admin_oficina` con rol Editor |
 | [Crear Autor](E05-T11-usuario-autor-crear.png) | Cuenta `campo_nicoya` con rol Autor (incluye un primer intento con correo repetido) |
-| [Usuarios](E05-T11-usuarios-lista.png) | Cuatro usuarios y sus roles |
+| [Usuarios](E05-T11-usuarios-lista.png) | Lista de usuarios del 28/10/2026 (cuatro); el segundo Autor `campo_liberia` se creó el 08/11/2026 |
 
 ## Capturas del 03/11/2026 (segunda tanda)
 

@@ -18,7 +18,7 @@ Estado: **ejecutado en el panel el 27 y 28/10/2026; probado en parte**. Cubre E0
 2. Plugins > Añadir: instalar y activar **Starter Templates**.
 3. En Apariencia > Starter Templates elegir "Classic Starter Templates" y el constructor **Block Editor**.
 4. Elegir una plantilla (búsqueda `local business`). El asistente instala Spectra Blocks, SureForms, SureRank y SureCookie; el ciclo observado duró 1,37 minutos.
-5. Editar las páginas que crea la plantilla (Inicio, Nuestros Productos, Quiénes somos, Contacto, Gallery).
+5. Editar las páginas que crea la plantilla (Inicio, Nuestros Productos, Quiénes somos y Contacto) y crear Información para Asociados (`/asociados/`). Gallery y Privacy Policy ya no figuran en la lista final de páginas.
 
 ### 2. Logo y colores (E01)
 
@@ -47,14 +47,14 @@ Estado: **ejecutado en el panel el 27 y 28/10/2026; probado en parte**. Cubre E0
 ### 6. Usuarios y roles (E05)
 
 1. Usuarios > Añadir: `admin_oficina` con rol Editor y `campo_nicoya` con rol Autor. Generar contraseñas privadas y no copiarlas a capturas.
-2. Crear un segundo Autor y entradas propiedad de cada Autor.
+2. Crear un segundo Autor (`campo_liberia`) y entradas propiedad de cada Autor.
 3. Ejecutar el procedimiento de denegación del [registro T11](../pruebas/registros/T11-E05-2026-10-28.md).
 
 ## Validación
 
 - Resultado esperado: el criterio de cada caso en [casos de prueba](../pruebas/casos.md) T07-T11.
-- Resultado observado: parcial en los cinco casos; el detalle y lo que falta está en cada registro.
-- Prueba permitida y denegada: la prueba denegada de E05 **no se ha ejecutado**.
+- Resultado observado (08/11/2026): E02 y E05 probados; E04 probado con observaciones; E03 implementado; E01 casi completo. El detalle y lo que falta está en cada registro.
+- Prueba permitida y denegada: ejecutada en E05 con `campo_nicoya`, `campo_liberia` y `admin_oficina` (ver T11).
 - Evidencia: [evidencias/wordpress](../evidencias/wordpress/README.md). Responsable: Ari. Revisor: por asignar.
 
 ## Consideraciones
@@ -66,16 +66,19 @@ Estado: **ejecutado en el panel el 27 y 28/10/2026; probado en parte**. Cubre E0
 - Las imágenes del sitio están en el volumen de archivos: confirmar que el respaldo los incluye ([contenido](../contenido/README.md)).
 - Reversión: desactivar el plugin o el tema desde el panel conserva los datos; borrar una página o un usuario no se deshace sin respaldo.
 
-### Estado al cierre (07/11/2026)
+### Estado al cierre (08/11/2026)
 
-El servidor de la VM dejó de estar accesible el 07/11/2026 a la 01:51, por lo que las siguientes acciones quedan **sin hacer**:
+Hecho: logo y paleta en tres tamaños de pantalla, menú de cuatro secciones, cinco páginas y seis entradas de tres autores con fuentes, formulario con envío público comprobado, segundo Autor `campo_liberia`, denegaciones de roles y edición del Editor sobre una entrada ajena.
 
-- Reemplazar el logo de plantilla "GREEN GARDENER" del encabezado de Contacto y la imagen de portada móvil de plantilla por material propio.
-- Capturar la vista de tablet (768 px).
-- Repetir las denegaciones de roles mostrando la sesión activa (escritorio con "Howdy, usuario" antes de cada una), y listar un segundo Autor real.
-- Repetir la edición del Editor sobre una entrada de `campo_nicoya`, ya que la entrada 2961 tiene autor `admin_oficina`.
-- Pegar en WordPress los textos de `contenido/entradas/`.
-- Verificar licencias de los plugins y de las imágenes generadas con IA.
+Pendiente:
+
+- Móvil: el logo se solapa con el título en Inicio y Contacto, y las columnas de Nuestros Productos no se apilan a 412 px (T07).
+- Revisar los iconos sociales de Contacto (Facebook, X, Pinterest), que pueden ser enlaces de la plantilla.
+- Texto "Please enable JavaScript" visible junto al formulario (cosmético; WordPress elimina `<noscript>`).
+- Licencias sin verificar: Database for WPForms y términos de OpenAI para las imágenes DALL·E 3.
+- Guardar en Git el texto fuente de Nuestros Productos e Información para Asociados.
+- Revisión humana (Revisor) de T07–T11 y del contenido.
+- El pie del sitio mostró WordPress 7.1.4 el 08/11/2026, mientras la documentación fija 7.1.3; confirmar con Daniel.
 
 ## Licencias de los componentes (consulta del 08/11/2026)
 
