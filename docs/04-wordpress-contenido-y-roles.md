@@ -41,7 +41,7 @@ El Editor sí puede editar entradas ajenas; es el comportamiento correcto. El Au
 2. Registrar versión real, tema, personalización y configuración del plugin.
 3. Crear cuentas con contraseñas privadas, asignar roles y publicar contenido.
 4. Probar con sesiones separadas operaciones permitidas y accesos directos denegados.
-5. Verificar menú, imágenes, plugin y lectura en dos tamaños de pantalla.
+5. Verificar menú, imágenes, plugin y lectura en tres tamaños de pantalla.
 6. Guardar fuentes y cambios del panel para reproducción y respaldo.
 
 Evidencia: T07-T11. Registrar resultados en [pruebas](08-pruebas-y-resultados.md), sin mostrar credenciales.
