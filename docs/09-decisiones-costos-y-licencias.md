@@ -9,7 +9,7 @@ Estado: comparación e inventario completados el 07/11/2026 ([T12](../pruebas/re
 | Apache como proxy en host | Reutiliza lo aprendido y concentra HTTPS | Compose no despliega el host; documentar BIND9, Apache, FTP y Cron. |
 | Dos servicios con volúmenes separados | Aislar aplicación y datos y conservar estado | Persistencia no protege de pérdida del volumen/VM. |
 | FTP con TLS y directorios privados | Cumplir FTP con aislamiento y proteger credenciales | Probar cliente, certificado, puertos pasivos y permisos. |
-| Galería como plugin inicial | Utilidad agrícola comprobable sin correo externo | Verificar licencia, versión y recuperación de sus medios. |
+| Formulario de contacto (WPForms Lite + Database for WPForms) como plugin de E04; FooGallery descartado | Utilidad agrícola comprobable sin correo externo | Licencia de Database for WPForms sin verificar; comprobar versión y recuperación de las respuestas guardadas. |
 | Cron y recuperación integral | Responder a la pérdida de información del caso | Medir pérdida máxima tolerada y duración de recuperación. |
 
 ## Comparación
