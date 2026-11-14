@@ -1,3 +1,4 @@
 # Crontab del usuario axel en la Mint del proyecto (cooperativa-mint).
 # Trae las copias del servidor cada hora, al minuto 15. Detalle: docs/14-andres-respaldo-cron.md (paso 11).
-15 * * * * "$HOME/copiar-respaldos-mint.sh"
+# SERVIDOR: IP del servidor por Tailscale (13/11/2026); Cron no hereda variables de la terminal.
+15 * * * * SERVIDOR=ftp-andrews@100.102.83.103 "$HOME/copiar-respaldos-mint.sh"

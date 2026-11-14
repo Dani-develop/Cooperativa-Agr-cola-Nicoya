@@ -10,7 +10,7 @@ Los procedimientos están en [casos de prueba](../pruebas/casos.md) y los archiv
 | T02 | Pruebas técnicas satisfactorias; revisión pendiente | 2026-10-24 / Ubuntu + Mint | `f2520a6`; repetición `9f1ac00` | [HTTPS](../pruebas/registros/T02-C02-2026-10-24.md) | Frander, pendiente |
 | T03 | Persistencia y versiones comprobadas; revisión pendiente | 2026-10-24 / Ubuntu + Mint | `f2520a6`; lectura adicional `9f1ac00` | [Persistencia](../pruebas/registros/T03-C03-2026-10-24.md) | Frander, pendiente |
 | T04 | Pendiente | | | | |
-| T05 | Parcial: volcado, Cron y restauración de la BD en contenedor aislado comprobados; archivos de WordPress y restauración completa pendientes | 2026-11-03 y 2026-11-07 / Ubuntu + Mint | Pendiente de commit | [Cron y volcado](../pruebas/registros/T05-C05-2026-11-03.md) | Por asignar |
+| T05 | Parcial: volcado, Cron y restauración de la BD en contenedor aislado comprobados; archivos de WordPress y restauración completa pendientes | 2026-11-03, 2026-11-07 y 2026-11-13 / Ubuntu + Mint | Pendiente de commit | [Cron y volcado](../pruebas/registros/T05-C05-2026-11-03.md) | Por asignar |
 | T06 | Pendiente | | | | |
 | T07 | Pendiente | | | | |
 | T08 | Pendiente | | | | |

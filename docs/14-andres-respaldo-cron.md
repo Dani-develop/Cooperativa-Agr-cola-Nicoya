@@ -4,7 +4,7 @@ Responsable: Andrés. Revisor humano: por asignar. Rama: `feature/c05-cron-andre
 
 ## Alcance y estado
 
-Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base de WordPress, el script de respaldo con validación y retención, su ejecución real por Cron (probada el 03/11/2026), la copia fuera del servidor hacia Mint con `rsync` y la restauración de la base en un contenedor aislado en Mint (07/11/2026), y dos scripts de Mint que automatizan la restauración de prueba y la copia periódica con Cron (pasos 10 y 11; funcionamiento informado por Andrés, evidencia por archivar). **Siguen pendientes** la copia y restauración de los archivos de WordPress (`wp-content`), la restauración visible por HTTPS, la reducción del ACL y la revisión de un compañero. La restauración se probó solo para la base de datos. Por eso C05 no está aprobado. Política y contrato completo en [respaldo y restauración](06-respaldo-y-restauracion.md).
+Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base de WordPress, el script de respaldo con validación y retención, su ejecución real por Cron (probada el 03/11/2026), la copia fuera del servidor hacia Mint con `rsync` y la restauración de la base en un contenedor aislado en Mint (07/11/2026), y dos scripts de Mint que automatizan la restauración de prueba y la copia periódica con Cron (pasos 10 y 11). Los scripts se probaron a mano el 13/11/2026 en una Mint reconstruida con Tailscale; el Cron de Mint se indicó como completado, sin log archivado. **Siguen pendientes** la copia y restauración de los archivos de WordPress (`wp-content`), la restauración visible por HTTPS, la reducción del ACL y la revisión de un compañero. La restauración se probó solo para la base de datos. Por eso C05 no está aprobado. Política y contrato completo en [respaldo y restauración](06-respaldo-y-restauracion.md).
 
 ## Decisiones y limitaciones
 
@@ -14,6 +14,8 @@ Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base d
 - **Hora del servidor: UTC.** Costa Rica es UTC-6, por lo que las 03:00 locales se programan a las `09:00` UTC.
 - **ACL amplia.** `ftp-andrews` tiene `rwx` sobre la carpeta de datos de la BD y para respaldar solo hace falta `r-x`. Con el volcado en su lugar conviene reducirlo: con escritura, un error o una cuenta comprometida podría dañar la base viva.
 - **Copia fuera del servidor por *pull*.** Las copias del servidor están en el disco de la VM y no protegen ante su pérdida, por eso Mint las trae con `rsync` sobre SSH. Mint inicia la conexión con una clave dedicada que en el servidor solo puede ejecutar `rrsync -ro` (lectura) sobre `/var/backups/cooperativa`: si Mint se compromete, no puede escribir ni borrar en el servidor. No se usa `--delete`, así que borrar copias en el servidor por retención no las borra en Mint (la retención de Mint está sin definir).
+- **El servidor debe estar encendido a la hora del respaldo.** Cron ejecuta la tarea solo si la máquina está encendida a las 09:00 UTC (03:00 en Costa Rica) y no recupera ejecuciones perdidas. Se observó (13/11/2026) que faltan los días en que el servidor estuvo apagado. Una opción para corregirlo, no implementada: pasar el Cron del servidor a una ejecución por hora con una comprobación en `backup.sh` que omita la pasada si ya existe un volcado válido del día, como ya hace la Mint.
+- **Mint por Tailscale.** La Mint llega al servidor por Tailscale (`100.102.83.103`) y no por la red interna de VirtualBox (`192.168.50.1`). La IP se pasa a los scripts con la variable `SERVIDOR`.
 - **Solo la base de datos.** Los archivos de WordPress (`wp-content`: subidas, temas, plugins) viven en el volumen `archivos_wordpress` y no se respaldan todavía. Restaurar solo el SQL no recupera imágenes ni plugins (ver [diagnóstico](07-operacion-y-diagnostico.md)).
 
 ## Valores de esta instalación
@@ -28,7 +30,7 @@ Requisito C05 / prueba T05. Este documento cubre el volcado lógico de la base d
 | Programación | `0 9 * * *` en el crontab de `ftp-andrews` (fuente: [cooperativa-backup.cron](../config/cron/cooperativa-backup.cron)) |
 | Retención | 7 volcados y 7 copias de archivos |
 | Tamaños observados | Volcado ≈ 1,2 MB; copia de archivos ≈ 10,5 MB; 11 GB libres de 23 GB |
-| Copia externa | Mint `axel@cooperativa-mint` trae a `~/copia-cooperativa` por `rsync` + SSH al servidor `192.168.50.1` (red interna). La primera Mint de prueba llegaba por la IP de Tailscale `100.78.86.80` a través de su anfitrión; la Mint del proyecto no, y usa `192.168.50.1` |
+| Copia externa | Mint `axel@cooperativa-mint` trae a `~/copia-cooperativa` por `rsync` + SSH al servidor por **Tailscale, `100.102.83.103`** (13/11/2026, tras reconstruir la Mint). Antes se usaron la red interna `192.168.50.1` y la IP `100.78.86.80`, que es de otro servidor desconectado y ya no se usa |
 | Clave de respaldo | `~/.ssh/id_respaldos` en Mint (ed25519, sin frase); en el servidor, línea de `authorized_keys` con `restrict,command="/usr/bin/rrsync -ro /var/backups/cooperativa"` (la instala el administrador) |
 | Restauración de prueba | Contenedor `bd-restauracion` (`mariadb:11.8.9`, sin puertos publicados) en Mint, base `cooperativa_wp` vacía; automatizada con [restaurar-prueba-mint.sh](../scripts/restaurar-prueba-mint.sh) |
 | Copia periódica en Mint | [copiar-respaldos-mint.sh](../scripts/copiar-respaldos-mint.sh) con Cron `15 * * * *` ([mint-copia.cron](../config/cron/mint-copia.cron)); log `~/copia-cooperativa.log`; retención 30 por tipo |
@@ -142,30 +144,58 @@ crontab -l
 
 ### 8. Copia fuera del servidor (desde cero en una Mint)
 
-Se hace en la Mint, con el usuario que guardará las copias (`axel`). El servidor debe ser alcanzable por SSH: `192.168.50.1` desde la Mint del proyecto.
+Se hace en la Mint, con el usuario que guardará las copias (`axel`). El servidor debe ser alcanzable por SSH. Desde el 13/11/2026 se usa **Tailscale** (IP del servidor: `100.102.83.103`), porque la Mint se reconstruyó y el servidor ya no comparte la red interna de VirtualBox con ella. En la red interna anterior la IP era `192.168.50.1`; los comandos de abajo usan la de Tailscale.
+
+Antes, en la Mint: quitar de la consola de administración de Tailscale la entrada de la Mint anterior (si no, la nueva se llama `cooperativa-mint-1`), instalar Tailscale con el instalador oficial, entrar con la misma cuenta que el servidor y comprobar que lo ve:
 
 ```bash
-sudo apt install -y rsync openssh-client
+curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_respaldos -C "respaldos-cooperativa-mint" -N ""
+sudo tailscale up --hostname=cooperativa-mint
+```
+
+```bash
+tailscale status
+```
+
+```bash
+timeout 5 bash -c 'cat < /dev/null > /dev/tcp/100.102.83.103/22' && echo PUERTO_22_ABIERTO || echo PUERTO_22_CERRADO
+```
+
+Instalar lo necesario y comprobar las herramientas:
+
+```bash
+sudo apt install -y rsync openssh-client git openssl cron docker.io
+```
+
+```bash
+for c in rsync ssh git openssl flock zcat gzip docker; do command -v $c >/dev/null && echo "ok $c" || echo "FALTA $c"; done
+```
+
+Crear la clave (una por Mint, para poder revocarlas por separado):
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_respaldos -C "respaldos-cooperativa-mint-nueva" -N ""
 ```
 
 ```bash
 cat ~/.ssh/id_respaldos.pub
 ```
 
-La clave queda sin frase para que Cron pueda usarla sin intervención; por eso se limita lo que puede hacer en el servidor. La cuenta `ftp-andrews` tiene el directorio personal en poder de root y no se puede escribir en él, así que `ssh-copy-id` falla con `mkdir: Permission denied`. El administrador del servidor crea `~/.ssh` y añade a `authorized_keys` esta línea, con la clave pública copiada de arriba:
+La clave queda sin frase para que Cron pueda usarla sin intervención; por eso se limita lo que puede hacer en el servidor. La cuenta `ftp-andrews` tiene el directorio personal en poder de root y no se puede escribir en él, así que `ssh-copy-id` falla con `mkdir: Permission denied`. Quien tenga `sudo` en el servidor la instala **añadiendo** esta línea al final de `/home/ftp-andrews/.ssh/authorized_keys`, con la clave pública copiada de arriba (sin tocar las demás; conviene antes `sudo cp -a` del archivo como copia de seguridad, y editarlo con `sudo nano` o añadir con `sudo tee -a`):
 
 ```text
-restrict,command="/usr/bin/rrsync -ro /var/backups/cooperativa" ssh-ed25519 AAAA... respaldos-cooperativa-mint
+restrict,command="/usr/bin/rrsync -ro /var/backups/cooperativa" ssh-ed25519 AAAA... respaldos-cooperativa-mint-nueva
 ```
+
+Cada clave debe quedar en **una sola línea**. Se comprueba en el servidor con `sudo awk '{print NR, length($0), $NF}' /home/ftp-andrews/.ssh/authorized_keys` (una fila por clave) y comparando el final de la clave con el de `cat ~/.ssh/id_respaldos.pub` en la Mint. No usar `ssh-copy-id`: falla y no conserva la restricción. Las líneas de Mints que ya no existen pueden borrarse del archivo.
 
 Con `rrsync -ro` la clave solo puede leer con `rsync` dentro de `/var/backups/cooperativa`: no abre una terminal ni escribe. Comprobar en la Mint que se pueden listar las copias y que no hay shell:
 
 ```bash
-rsync -e "ssh -i ~/.ssh/id_respaldos" --list-only ftp-andrews@192.168.50.1:/
+rsync -e "ssh -i $HOME/.ssh/id_respaldos" --list-only ftp-andrews@100.102.83.103:/
 ```
 
 Traer las copias. La ruta remota es `/` porque `rrsync` ya fija la raíz; no se usa `--delete` y se excluye el archivo de bloqueo:
@@ -175,7 +205,7 @@ mkdir -p ~/copia-cooperativa
 ```
 
 ```bash
-rsync -av --exclude=.lock -e "ssh -i ~/.ssh/id_respaldos" ftp-andrews@192.168.50.1:/ ~/copia-cooperativa/
+rsync -av --exclude=.lock -e "ssh -i $HOME/.ssh/id_respaldos" ftp-andrews@100.102.83.103:/ ~/copia-cooperativa/
 ```
 
 ```bash
@@ -188,7 +218,7 @@ Para verificar los hashes sin comodines (se pierden al pegar el comando por algu
 cd ~/copia-cooperativa && sha256sum -c bd-AAAAMMDD-HHMMSS.sql.gz.sha256
 ```
 
-La primera vez, `ssh` pregunta si se confía en la huella del servidor: compararla con la del administrador antes de aceptar. Si el puerto 22 se rechaza (`Connection refused`), reintentar pasado un momento y comprobar que se usa la IP correcta para esa Mint.
+La primera vez, `ssh` pregunta si se confía en la huella del servidor: compararla antes de aceptar con la que muestra `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` en el servidor. Si el puerto 22 se rechaza (`Connection refused`), reintentar pasado un momento y comprobar que se usa la IP correcta para esa Mint.
 
 Para que la Mint traiga las copias sola, con verificación y retención, ver el [paso 11](#11-copia-periódica-en-mint-con-cron).
 
@@ -246,17 +276,25 @@ Restaurar sobre el sitio real (servidor de reemplazo) sería otro procedimiento:
 
 [scripts/restaurar-prueba-mint.sh](../scripts/restaurar-prueba-mint.sh) ejecuta el paso 9 completo y se detiene si algo falla. No está en el servidor: se instala en la Mint.
 
-Crear el archivo (la Mint no tiene el repositorio): abrir `cat > ~/restaurar-prueba-mint.sh <<'EOF'`, pegar el contenido del script y cerrar con una línea `EOF`. El script no tiene tildes ni asteriscos porque se pierden al pegar por SSH. Comprobar que quedó igual al del repositorio y dar permisos:
+Instalar los dos scripts de Mint (este y el del paso 11) desde la rama publicada del repositorio, copiándolos al directorio personal:
 
 ```bash
-sha256sum ~/restaurar-prueba-mint.sh
+git clone --branch feature/c05-cron-andres --depth 1 https://github.com/Dani-develop/Cooperativa-Agr-cola-Nicoya.git ~/repo-cooperativa
 ```
 
 ```bash
-bash -n ~/restaurar-prueba-mint.sh && echo SINTAXIS_OK; chmod 750 ~/restaurar-prueba-mint.sh
+cp ~/repo-cooperativa/scripts/copiar-respaldos-mint.sh ~/repo-cooperativa/scripts/restaurar-prueba-mint.sh ~/
 ```
 
-El hash debe coincidir con `sha256sum scripts/restaurar-prueba-mint.sh` en el repositorio. Ejecutarlo:
+```bash
+chmod 750 ~/copiar-respaldos-mint.sh ~/restaurar-prueba-mint.sh
+```
+
+```bash
+bash -n ~/copiar-respaldos-mint.sh && bash -n ~/restaurar-prueba-mint.sh && echo SINTAXIS_OK
+```
+
+Si el repositorio no estuviera accesible, se puede crear cada archivo con `cat > ~/script.sh <<'EOF'`, pegando el contenido y cerrando con una línea `EOF`; los scripts no tienen tildes ni asteriscos porque se pierden al pegar por SSH. Ejecutarlo:
 
 ```bash
 ~/restaurar-prueba-mint.sh
@@ -276,7 +314,7 @@ Límites: solo cubre la BD. Usa `docker` si el usuario puede, o `sudo docker`; p
 
 ### 11. Copia periódica en Mint con Cron
 
-[scripts/copiar-respaldos-mint.sh](../scripts/copiar-respaldos-mint.sh) hace lo del paso 8 de forma desatendida. Instalación igual que el paso 10 (`~/copiar-respaldos-mint.sh`, hash, `bash -n`, `chmod 750`). Cada ejecución:
+[scripts/copiar-respaldos-mint.sh](../scripts/copiar-respaldos-mint.sh) hace lo del paso 8 de forma desatendida. Se instala junto con el del paso 10 (`~/copiar-respaldos-mint.sh`). La IP del servidor sale de la variable `SERVIDOR`, que por defecto vale `ftp-andrews@192.168.50.1` (la red interna anterior): con Tailscale hay que indicarla, tanto a mano como en la línea de Cron, porque Cron no hereda variables de la terminal. Cada ejecución:
 
 1. Toma un bloqueo (`flock`); si hay otra copia en curso, se omite y lo anota.
 2. Ejecuta `rsync` con la clave restringida, `BatchMode` y 15 s de espera de conexión, sin `--delete`.
@@ -287,19 +325,19 @@ Límites: solo cubre la BD. Usa `docker` si el usuario puede, o `sudo docker`; p
 Probarlo a mano:
 
 ```bash
-~/copiar-respaldos-mint.sh; echo "codigo: $?"; cat ~/copia-cooperativa.log
+SERVIDOR=ftp-andrews@100.102.83.103 ~/copiar-respaldos-mint.sh; echo "codigo: $?"; cat ~/copia-cooperativa.log
 ```
 
 Probar Cron con un horario corto. Revisar antes con `crontab -l` que no haya otras tareas que se pisen; esta línea añade la prueba al crontab existente:
 
 ```bash
-(crontab -l 2>/dev/null; echo '*/2 * * * * "$HOME/copiar-respaldos-mint.sh"') | crontab -
+(crontab -l 2>/dev/null; echo '*/2 * * * * SERVIDOR=ftp-andrews@100.102.83.103 "$HOME/copiar-respaldos-mint.sh"') | crontab -
 ```
 
 Esperar unos 5 minutos sin ejecutar nada a mano y revisar `tail -n 12 ~/copia-cooperativa.log`: bloques `INICIO` ... `FIN codigo 0` en minutos pares. Después, el horario definitivo (cada hora, al minuto 15), que reemplaza todo el crontab de ese usuario:
 
 ```bash
-echo '15 * * * * "$HOME/copiar-respaldos-mint.sh"' | crontab -
+echo '15 * * * * SERVIDOR=ftp-andrews@100.102.83.103 "$HOME/copiar-respaldos-mint.sh"' | crontab -
 ```
 
 Se programa cada hora y no una vez al día porque Cron no recupera una ejecución perdida si la VM está apagada a la hora fijada, y `rsync` solo copia lo nuevo. La fuente de la línea es [mint-copia.cron](../config/cron/mint-copia.cron). La hora de la Mint es la local de Costa Rica; el servidor genera la copia a las 03:00 y la primera pasada por hora posterior la trae.
@@ -315,11 +353,13 @@ Se programa cada hora y no una vez al día porque Cron no recupera una ejecució
   - Horario definitivo `0 9 * * *`: el volcado `bd-20261106-090002.sql.gz` (1,2 MB, 03:00 hora de Costa Rica del 06/11) lo generó esa ejecución nocturna y se usó en la restauración.
   - Copia externa, 07/11/2026: `rsync` con la clave restringida trajo los volcados a `~/copia-cooperativa` en la Mint del proyecto.
   - Restauración aislada en Mint, 07/11/2026: la carga del volcado tardó **22,9 s** (`real`) en el contenedor `bd-restauracion`; `SHOW TABLES` dio 28 líneas (27 tablas y la cabecera); `blogname` = «Cooperativa Agricola Nicoya», `home` y `siteurl` = `https://cooperativa.internal`; `wp_users` tiene 4 filas. El primer arranque del contenedor falló con `Unable to start server.` en la VM lenta y funcionó al repetirlo con una espera mayor.
-  - Scripts de Mint, 07/11/2026: Andrés informó que `restaurar-prueba-mint.sh` y `copiar-respaldos-mint.sh` (con su Cron) funcionaron en la Mint del proyecto. **Sus salidas y el log de Cron no se transcribieron**, así que no hay evidencia archivada de esas ejecuciones; falta adjuntarla.
-- Evidencia: [salida transcrita del volcado, la incidencia y Cron](../evidencias/respaldos/C05-T05-cron-volcado-2026-11-03.txt), [de la primera copia de archivos](../evidencias/respaldos/C05-T05-script-manual-2026-10-30.txt) y [de la restauración en Mint](../evidencias/respaldos/C05-T05-restauracion-mint-2026-11-07.txt). Registro: [T05](../pruebas/registros/T05-C05-2026-11-03.md). Commit de configuración: pendiente de commit.
+  - Servidor apagado, comprobado el 13/11/2026: el log solo tiene ejecuciones de los días 6 y 9 (todas con `FIN codigo 0`), el servidor arrancó el 14/11 a las 01:18 UTC y no hay copias de los días 7, 8 y 10 a 13. Con una sola hora fija, un servidor apagado a las 09:00 UTC significa un día sin respaldo.
+  - Mint reconstruida con Tailscale, 13/11/2026 (la anterior se borró): paso 8 completo con la IP `100.102.83.103`; `copiar-respaldos-mint.sh` a mano terminó con código 0 y verificó `bd-20261109-090005.sql.gz` (primera copia de todo el historial: unos 4 min 27 s); `restaurar-prueba-mint.sh` terminó con `FIN codigo 0`: hash verificado, **32,3 s** de carga, 27 tablas, `blogname` «Cooperativa Agricola Nicoya», `siteurl` `https://cooperativa.internal` y 5 usuarios de WordPress (el volcado del día 6 tenía 4). El primer intento del contenedor falló con `Unable to start server.` y el reintento automático del script lo resolvió.
+  - Cron de Mint: Andrés indicó haber completado los pasos de Cron (prueba cada 2 minutos y luego cada hora), **pero no se aportó el log ni `crontab -l`**: no hay evidencia archivada de esas ejecuciones.
+- Evidencia: [salida transcrita del volcado, la incidencia y Cron](../evidencias/respaldos/C05-T05-cron-volcado-2026-11-03.txt), [de la primera copia de archivos](../evidencias/respaldos/C05-T05-script-manual-2026-10-30.txt), [de la restauración manual en Mint](../evidencias/respaldos/C05-T05-restauracion-mint-2026-11-07.txt) y [de la Mint reconstruida, la copia y la restauración con script](../evidencias/respaldos/C05-T05-mint-nueva-2026-11-13.txt). Registro: [T05](../pruebas/registros/T05-C05-2026-11-03.md). Commit de configuración bajo prueba: `8d2b303` para los scripts de Mint; el resto, pendiente del commit que incluye este documento.
 - Responsable: Andrés. Revisor: por asignar.
 
-La base de datos se recupera desde una copia fuera del servidor en un contenedor aislado. No se ha probado recuperar el sitio completo: faltan los archivos de WordPress, la configuración HTTPS y la copia de archivos de la BD.
+La base de datos se recupera desde una copia fuera del servidor en un contenedor aislado, con el script y desde una Mint reconstruida. No se ha probado recuperar el sitio completo: faltan los archivos de WordPress, la configuración HTTPS y la copia de archivos de la BD.
 
 ## Incidencia: volcado bloqueado
 
@@ -342,7 +382,8 @@ La causa exacta de por qué se bloquea la salida capturada no se determinó. El 
 1. Respaldar `wp-content` (medir su tamaño y dar permiso de lectura a la cuenta de respaldo) y restaurarlo junto a la BD. `wp-config.php` se regenera desde `.env` y no hace falta copiarlo.
 2. Restauración completa visible por HTTPS (Apache, certificado, WordPress, BD y DNS) en un servidor de reemplazo.
 3. Restaurar la copia de archivos de la BD (`.tar.gz`) para decidir si se conserva como respaldo secundario.
-4. Archivar la evidencia (salida del script de restauración y `~/copia-cooperativa.log` con varias ejecuciones de Cron) de los pasos 10 y 11; quitar la tarea de clase de la primera Mint si existe. Decidir si se programa también la prueba de restauración (requiere permiso de Docker para `axel`).
+4. Archivar el log de Cron de la Mint (`~/copia-cooperativa.log` con ejecuciones lanzadas por Cron y `crontab -l`); quitar la tarea de clase de la primera Mint si existe y las claves de Mints que ya no existen de `authorized_keys`. Decidir si se programa también la prueba de restauración (requiere permiso de Docker para `axel`).
+5. Decidir si el Cron del servidor pasa a una ejecución por hora con comprobación diaria, para no perder días en que el servidor esté apagado a las 09:00 UTC.
 5. Reducir el ACL de `ftp-andrews` sobre la carpeta de datos a lectura.
 6. Guardar fuera del repositorio una copia de `.env` y del material TLS, o regenerar el TLS con `scripts/preparar-tls.sh` y reinstalar la CA en los clientes.
 7. Revisión de un compañero.

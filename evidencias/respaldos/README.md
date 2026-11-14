@@ -7,6 +7,8 @@ Estado: parcial. Referencias: C05/T05.
 
 - [Copia a Mint y restauración aislada de la BD, 07/11/2026](C05-T05-restauracion-mint-2026-11-07.txt): volcado traído con `rsync`, carga en un contenedor MariaDB aislado y comprobaciones (transcripción de capturas).
 
+- [Mint reconstruida, copia por Tailscale y restauración con script, 13/11/2026](C05-T05-mint-nueva-2026-11-13.txt): log del servidor (días sin copia), listado de las copias, `copiar-respaldos-mint.sh` y `restaurar-prueba-mint.sh` (transcripción de capturas; sin log del Cron de Mint).
+
 Registro: [T05](../../pruebas/registros/T05-C05-2026-11-03.md). Siguen pendientes los archivos de WordPress y la restauración completa por HTTPS.
 
 Agregar evidencia real después de ejecutar la prueba, con fecha/equipo y commit bajo prueba. Enlazarla en el [índice](../indice.md) y en el registro correspondiente. Revisar datos privados antes de publicar.

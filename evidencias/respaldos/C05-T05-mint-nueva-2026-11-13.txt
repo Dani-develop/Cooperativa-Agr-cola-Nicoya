@@ -1,0 +1,79 @@
+C05 / T05: Mint reconstruida, copia por Tailscale y restauracion con script
+Fecha: 2026-11-13 (hora local de Costa Rica en la Mint; el servidor trabaja en UTC). Maquinas: cooperativa-mint (usuario axel, VM nueva) y
+cooperativa-server (usuario ftp-andrews), conectadas por Tailscale (servidor: 100.102.83.103).
+Commit de configuracion bajo prueba: 8d2b303 (scripts de Mint tal como estaban en la rama feature/c05-cron-andres).
+Transcripcion de capturas de la terminal; no contiene credenciales. La huella SHA256 del servidor no se transcribe.
+
+== 1. Servidor: log del respaldo y estado (capturado el 13/11 en Costa Rica, ya 14/11 en UTC) ==
+$ tail -n 15 /var/log/cooperativa-backup.log; echo ---; uptime -s; echo ---; crontab -l
+2026-11-06 09:00:03 OK /var/backups/cooperativa/bd-20261106-090002.sql.gz 1168677 bytes
+2026-11-06 09:00:03 OK hash verificado /var/backups/cooperativa/bd-20261106-090002.sql.gz
+2026-11-06 09:00:04 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210801.sql.gz
+2026-11-06 09:00:04 INICIO copia de archivos de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-11-06 09:00:07 OK /var/backups/cooperativa/bd-20261106-090001.tar.gz 11776945 bytes
+2026-11-06 09:00:07 RETENCION eliminado /var/backups/cooperativa/bd-20261103-210801.tar.gz
+2026-11-06 09:00:07 FIN codigo 0
+2026-11-09 09:00:03 INICIO volcado logico
+2026-11-09 09:00:22 OK /var/backups/cooperativa/bd-20261109-090005.sql.gz 1172976 bytes
+2026-11-09 09:00:22 OK hash verificado /var/backups/cooperativa/bd-20261109-090005.sql.gz
+2026-11-09 09:00:23 RETENCION eliminado /var/backups/cooperativa/bd-20261103-211001.sql.gz
+2026-11-09 09:00:23 INICIO copia de archivos de /var/lib/docker/volumes/cooperativa-nicoya_datos_bd/_data
+2026-11-09 09:00:53 OK /var/backups/cooperativa/bd-20261109-090002.tar.gz 12713790 bytes
+2026-11-09 09:00:54 RETENCION eliminado /var/backups/cooperativa/bd-20261103-211001.tar.gz
+2026-11-09 09:00:54 FIN codigo 0
+---
+2026-11-14 01:18:46
+---
+0 9 * * * /var/scripts/backup-bd.sh >> /var/log/cooperativa-cron.log 2>&1
+Lectura: todas las ejecuciones registradas terminan en codigo 0; el servidor arranco el 14/11 a las 01:18 UTC y antes estuvo apagado.
+No hay copias de los dias 7, 8 y 10 a 13 de noviembre.
+
+== 2. Mint: listado de las copias con la clave restringida (rsync --list-only, hora local de la Mint) ==
+$ rsync -e "ssh -i $HOME/.ssh/id_respaldos" --list-only ftp-andrews@100.102.83.103:/
+(la primera conexion pidio confirmar la huella del servidor; se acepto)
+.lock                          0 bytes   2026/11/09 03:00:02
+bd-20261103-2112xx a 2118xx  .sql.gz y .tar.gz   (4 juegos de las pruebas de Cron del 03/11: 211201, 211401, 211601 y 211801)
+bd-20261105-090002.sql.gz       1.167.520   2026/11/05 03:00:03      bd-20261105-090001.tar.gz   11.619.261
+bd-20261106-090002.sql.gz       1.168.677   2026/11/06 03:00:03      bd-20261106-090001.tar.gz   11.776.945
+bd-20261109-090005.sql.gz       1.172.976   2026/11/09 03:00:22      bd-20261109-090002.tar.gz   12.713.790
+(cada archivo con su .sha256 de 92 bytes). Total: 7 volcados y 7 copias de archivos, la retencion de 7 del servidor.
+
+== 3. Mint: comprobacion de herramientas y primera copia con el script ==
+$ for c in rsync ssh git openssl flock zcat gzip docker; do command -v $c >/dev/null && echo "ok $c" || echo "FALTA $c"; done
+ok rsync / ok ssh / ok git / ok openssl / ok flock / ok zcat / ok gzip / ok docker
+$ SERVIDOR=ftp-andrews@100.102.83.103 ~/copiar-respaldos-mint.sh; echo "codigo: $?"
+codigo: 0
+$ cat ~/copia-cooperativa.log
+2026-11-13 21:30:54 INICIO copia desde ftp-andrews@100.102.83.103
+bd-20261109-090005.sql.gz: OK
+2026-11-13 21:35:21 OK ultimo volcado verificado: bd-20261109-090005.sql.gz
+2026-11-13 21:35:21 FIN codigo 0
+(la primera copia, con todo el historial, tardo unos 4 min 27 s por Tailscale)
+
+== 4. Mint: restauracion de prueba con restaurar-prueba-mint.sh ==
+$ ~/restaurar-prueba-mint.sh
+2026-11-13 21:38:59 INICIO restauracion de prueba
+2026-11-13 21:39:00 Volcado: /home/axel/copia-cooperativa/bd-20261109-090005.sql.gz (1,2M)
+2026-11-13 21:39:00 Hash verificado
+2026-11-13 21:39:01 Intento 1/3: creando bd-restauracion (mariadb:11.8.9, sin puertos publicados)
+2026-11-13 21:40:38 El contenedor se detuvo; ultimas lineas del registro:
+  ... [Note] InnoDB: File './ibtmp1' size is now 12.000MiB.
+  ... [Note] InnoDB: log sequence number 45434; transaction id 14
+  ... [Note] Plugin 'FEEDBACK' is disabled.
+  ... [Note] Plugin 'wsrep-provider' is disabled.
+  2026-11-14 03:40:34+00:00 [ERROR] [Entrypoint]: Unable to start server.
+2026-11-13 21:40:39 Intento 2/3: creando bd-restauracion (mariadb:11.8.9, sin puertos publicados)
+2026-11-13 21:43:01 MariaDB lista
+2026-11-13 21:43:34 Carga completada en 32,3 s
+2026-11-13 21:43:41 Tablas: 27
+2026-11-13 21:43:41 blogname: Cooperativa Agricola Nicoya
+2026-11-13 21:43:41 siteurl: https://cooperativa.internal
+2026-11-13 21:43:42 Usuarios de WordPress: 5
+2026-11-13 21:43:45 Contenedor bd-restauracion eliminado
+2026-11-13 21:43:45 FIN codigo 0
+
+== No comprobado en esta prueba ==
+- Cron de Mint: Andres indico haber completado los pasos de Cron indicados (prueba cada 2 minutos y luego cada hora, con
+  SERVIDOR=100.102.83.103 en la linea), pero no se aporto el log de esas ejecuciones ni el crontab -l.
+- Archivos de WordPress (wp-content), .env, claves TLS, Apache, DNS y sitio visible por HTTPS.
+- Restauracion de la copia de archivos de la BD (.tar.gz).
